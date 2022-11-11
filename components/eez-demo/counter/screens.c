@@ -74,6 +74,7 @@ void create_screen_main() {
             objects.label_1 = obj;
             lv_obj_set_pos(obj, 126, 120);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
         {
             lv_obj_t *obj = lv_img_create(parent_obj);
