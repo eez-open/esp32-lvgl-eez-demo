@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedRootObject": "/bitmaps",
+    "selectedRootObject": "/pages",
     "selectedPageObject": "/pages/0",
     "selectedGlobalVariableObject": "/variables/globalVariables/0",
     "selectedFontObject": "/fonts/1",
@@ -924,11 +924,11 @@
     "/pages/0[flow-state]": {
       "selection": {
         "2": {
-          "1": {
+          "2": {
             "0": {}
           },
-          "2": {},
-          "3": {}
+          "3": {},
+          "4": {}
         }
       },
       "transform": {
