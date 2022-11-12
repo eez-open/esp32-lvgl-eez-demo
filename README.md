@@ -10,6 +10,10 @@ https://github.com/eez-open/eez-framework
 
 https://github.com/eez-open/studio
 
+### Example EEZ GUI with ESP32 using LVGL
+
+![Example EEZ GUI with ESP32 using LVGL](images/eez_lvgl.jpg)
+
 ### LVGL project for ESP32 with EEZ studio demo
 
 EEZ demo project is located in eez-project directory - you can open that file with EEZ Studio
@@ -43,7 +47,7 @@ Instructions assume you are using the v4.x toolchain, otherwise use the make com
 
 ### Build and run the demo.
 
-1. Clone this project by `https://github.com/goran-mahovlic/esp32-lvgl-eez-demo.git`, this will pull this repo and its submodules.
+1. Clone this project by `git clone --recurse-submodules https://github.com/goran-mahovlic/esp32-lvgl-eez-demo.git`, this will pull this repo and its submodules.
 
 2. Get into the created `esp32-lvgl-eez-demo` directory.
 
