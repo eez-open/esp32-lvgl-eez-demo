@@ -34,6 +34,9 @@
  *      DEFINES
  *********************/
 #define TAG "lv_port_disp"
+//#ifndef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+//  #define CONFIG_LV_TFT_DISPLAY_MONOCHROME
+//#endif
 
 #ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
   #define MY_DISP_HOR_RES 400 /* 240 */

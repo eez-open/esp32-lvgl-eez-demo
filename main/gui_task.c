@@ -125,13 +125,8 @@ static void guiTask(void *pvParameter)
     /* Create the demo application */
     #ifdef CONFIG_LV_USE_DEMO_EEZ
       /*Create a "Hello world!" label*/
-      #ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
-      lv_obj_t * label = lv_label_create(lv_scr_act());
-      lv_label_set_text(label, "Hello world!");
-      lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
-      #else
       flowInit();
-    #endif
+
     #else
       create_demo_application();
     #endif
@@ -143,10 +138,8 @@ static void guiTask(void *pvParameter)
         if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
             lv_task_handler();
             #ifdef CONFIG_LV_USE_DEMO_EEZ
-              #ifndef CONFIG_LV_TFT_DISPLAY_MONOCHROME
                 flowTick();
               #endif
-            #endif
             xSemaphoreGive(xGuiSemaphore);
         }
     }
@@ -167,21 +160,19 @@ static void create_demo_application(void)
 #if defined CONFIG_LV_TFT_DISPLAY_MONOCHROME || \
     defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S || \
     defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8151D
-
-    /* use a pretty small demo for monochrome displays */
-    /* Get the current screen  */
-    lv_obj_t *scr = lv_disp_get_scr_act(NULL);
-
-    /*Create a Label on the currently active screen*/
-    lv_obj_t *label1 = lv_label_create(scr, NULL);
-
-    /*Modify the Label's text*/
-    lv_label_set_text(label1, "Hello\nworld");
-
-    /* Align the Label to the center
-     * NULL means align on parent (which is the screen now)
-     * 0, 0 at the end means an x, y offset after alignment*/
-    lv_obj_align(label1, NULL, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_t *obj = lv_obj_create(0);
+    lv_obj.main = obj;
+    lv_obj_set_pos(obj, 0, 0);
+    lv_obj_set_size(obj, 400, 300);
+    {
+        lv_obj_t *parent_obj = obj;
+        {
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            lv_obj_set_pos(obj, 156, 142);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_label_set_text(obj, "Hello, world!");
+        }
+    }
 
 #else
     /* Otherwise we show the selected demo */
