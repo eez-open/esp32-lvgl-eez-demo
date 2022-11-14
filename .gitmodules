@@ -10,3 +10,7 @@
 [submodule "components/epd_driver"]
 	path = components/epd_driver
 	url = https://github.com/martinberlin/epdiy-rotation.git
+[submodule "components/inkplate"]
+	path = components/inkplate
+	url = https://github.com/turgu1/ESP-IDF-InkPlate.git
+	branch = v0.9.6
