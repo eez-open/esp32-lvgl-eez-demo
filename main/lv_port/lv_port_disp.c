@@ -35,14 +35,15 @@
  *********************/
 #define TAG "lv_port_disp"
 
-
-#define MY_DISP_HOR_RES 320 /* 240 */
-#define MY_DISP_VER_RES 240 /* 320 */
-
-
-#define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * 16) /* 10240 */
-//#define DISP_BUF_SIZE_CUSTOM (128000 /* 17000 */)
-
+#ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+  #define MY_DISP_HOR_RES 400 /* 240 */
+  #define MY_DISP_VER_RES 300 /* 320 */
+  #define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * 8) /* 10240 */
+#else
+  #define MY_DISP_HOR_RES 240 /* 240 */
+  #define MY_DISP_VER_RES 320 /* 320 */
+  #define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * 16) /* 10240 */
+#endif
 
 /**********************
  *      TYPEDEFS
@@ -122,7 +123,7 @@ void lv_port_disp_init(void)
 
     uint32_t size_in_px = DISP_BUF_SIZE_CUSTOM;
 
-#if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_IL3820 || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_JD79653A || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8151D || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_SSD1306
+#if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_IL3820 || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_JD79653A || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8151D || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8176 || defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_SSD1306
     /* Actual size in pixels, not bytes. */
     size_in_px *= 8;
 #endif

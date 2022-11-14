@@ -124,7 +124,14 @@ static void guiTask(void *pvParameter)
 
     /* Create the demo application */
     #ifdef CONFIG_LV_USE_DEMO_EEZ
+      /*Create a "Hello world!" label*/
+      #ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+      lv_obj_t * label = lv_label_create(lv_scr_act());
+      lv_label_set_text(label, "Hello world!");
+      lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+      #else
       flowInit();
+    #endif
     #else
       create_demo_application();
     #endif
@@ -136,7 +143,9 @@ static void guiTask(void *pvParameter)
         if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
             lv_task_handler();
             #ifdef CONFIG_LV_USE_DEMO_EEZ
-              flowTick();
+              #ifndef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+                flowTick();
+              #endif
             #endif
             xSemaphoreGive(xGuiSemaphore);
         }
@@ -156,7 +165,8 @@ static void create_demo_application(void)
     /* When using a monochrome display we only show "Hello World" centered on the
      * screen */
 #if defined CONFIG_LV_TFT_DISPLAY_MONOCHROME || \
-    defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S
+    defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S || \
+    defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8151D
 
     /* use a pretty small demo for monochrome displays */
     /* Get the current screen  */
@@ -172,6 +182,7 @@ static void create_demo_application(void)
      * NULL means align on parent (which is the screen now)
      * 0, 0 at the end means an x, y offset after alignment*/
     lv_obj_align(label1, NULL, LV_ALIGN_CENTER, 0, 0);
+
 #else
     /* Otherwise we show the selected demo */
 #if defined   CONFIG_LV_USE_DEMO_WIDGETS
