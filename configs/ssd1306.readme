@@ -1,0 +1,7 @@
+Set right buffer size in main/lv_port/lv_port_disp.c
+
+ #ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+-  #define MY_DISP_HOR_RES 400 /* 240 */
+-  #define MY_DISP_VER_RES 300 /* 320 */
++  #define MY_DISP_HOR_RES 128 /* 240 */
++  #define MY_DISP_VER_RES 64 /* 320 */
