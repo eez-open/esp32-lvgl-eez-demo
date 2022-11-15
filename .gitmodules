@@ -14,3 +14,6 @@
 	path = components/inkplate
 	url = https://github.com/turgu1/ESP-IDF-InkPlate.git
 	branch = v0.9.6
+[submodule "components/paralell_tft_lib"]
+	path = components/paralell_tft_lib
+	url = https://github.com/nopnop2002/esp-idf-parallel-tft
