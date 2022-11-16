@@ -1,0 +1,119 @@
+// ======================== tasks.json ========================
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [{
+      "label": "Configure",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py menuconfig",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py menuconfig" }
+    },
+    {
+      "label": "Build",
+      "group": "build",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py build",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py build" },
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["relative", "${workspaceFolder}/build"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Get size",
+      "group": "build",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py size",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py size" },
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["relative", "${workspaceFolder}/build"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Clean",
+      "group": "build",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py clean",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py clean" }
+    },
+    {
+      "label": "Clean (full)",
+      "group": "build",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py fullclean",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py fullclean" }
+    },
+    {
+      "label": "Flash",
+      "group": "test",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py flash",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py flash" },
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["relative", "${workspaceFolder}/build"],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "Erase flash",
+      "group": "build",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh&& idf.py erase_flash",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py erase_flash" }
+    },
+    {
+      "label": "Monitor",
+      "group": "test",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && idf.py monitor",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && idf.py monitor" },
+      "isBackground": true,
+      //"dependsOn": ["Flash"]
+    },
+    {
+      "label": "OpenOCD",
+      "type": "shell",
+      "command": ". /media/internal/esp/esp-idf-v4.4.3/export.sh && openocd -c 'set ESP_RTOS none' -f board/esp32-wrover-kit-3.3v.cfg -c init;halt;esp appimage_offset 0x210000",
+      "windows": { "command": "%userprofile%\\esp\\esp-idf\\export.bat && openocd -f interface/ftdi/FT2232HL.cfg -f board/esp32-wrover-kit-3.3v.cfg -c init;halt;esp appimage_offset 0x210000" },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(Info |Warn ):(.*)$", // Ignore errors
+          "severity": 1,
+          "message": 2
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Info : Listening on port \\d+ for gdb connections"
+        }
+      }
+    }
+  ]
+}

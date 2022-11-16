@@ -1,0 +1,10 @@
+// ======================== settings.json ========================
+{
+  "taskExplorer.enableMake": false,
+  "search.exclude": {
+    "**/build": true
+  },
+  "idf.adapterTargetName": "esp32",
+  "idf.flashType": "UART",
+  "idf.port": "/dev/ttyUSB0"
+}
