@@ -47,7 +47,7 @@
  *********************/
 #define TAG               "demo"
 #define LV_TICK_PERIOD_MS 1
-
+#define CONFIG_LV_TFT_DISPLAY_MONOCHROME
 /**********************
  *      TYPEDEFS
  **********************/
@@ -126,7 +126,6 @@ static void guiTask(void *pvParameter)
     #ifdef CONFIG_LV_USE_DEMO_EEZ
       /*Create a "Hello world!" label*/
       flowInit();
-
     #else
       create_demo_application();
     #endif
@@ -168,7 +167,7 @@ static void create_demo_application(void)
         lv_obj_t *parent_obj = obj;
         {
             lv_obj_t *obj = lv_label_create(parent_obj);
-            lv_obj_set_pos(obj, 156, 142);
+            lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_label_set_text(obj, "Hello, world!");
         }
@@ -200,7 +199,6 @@ static void lv_tick_task(void *arg)
 
     lv_tick_inc(LV_TICK_PERIOD_MS);
 }
-
 
 #else /*Enable this file at the top*/
 /*This dummy typedef exists purely to silence -Wpedantic.*/

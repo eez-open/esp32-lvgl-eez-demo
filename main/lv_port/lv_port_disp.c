@@ -34,14 +34,15 @@
  *      DEFINES
  *********************/
 #define TAG "lv_port_disp"
+#define CONFIG_LV_TFT_DISPLAY_E_INK
 //#ifndef CONFIG_LV_TFT_DISPLAY_MONOCHROME
 //  #define CONFIG_LV_TFT_DISPLAY_MONOCHROME
 //#endif
 
-#ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+#ifdef CONFIG_LV_TFT_DISPLAY_E_INK
   #define MY_DISP_HOR_RES 400 /* 240 */
   #define MY_DISP_VER_RES 300 /* 320 */
-  #define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * 8) /* 10240 */
+  #define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * MY_DISP_VER_RES * 1) /* 10240 */
 #else
   #define MY_DISP_HOR_RES 320 /* 240 */
   #define MY_DISP_VER_RES 240 /* 320 */
@@ -113,7 +114,7 @@ void lv_port_disp_init(void)
     assert(buf1 != NULL);
 
     /* Use double buffered when not working with monochrome displays */
-#ifndef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+#ifndef CONFIG_LV_TFT_DISPLAY_E_INK
     /* static lv_color_t * */
     buf2 = heap_caps_malloc(DISP_BUF_SIZE_CUSTOM * sizeof(lv_color_t),
                             MALLOC_CAP_DMA | MALLOC_CAP_8BIT /* MALLOC_CAP_DMA */);
@@ -149,19 +150,19 @@ void lv_port_disp_init(void)
 
     /*Used to copy the buffer's content to the display*/
     disp_drv.flush_cb = disp_driver_flush;
+    
 
     /*Set the resolution of the display*/
     disp_drv.hor_res = MY_DISP_HOR_RES;
     disp_drv.ver_res = MY_DISP_VER_RES;
 
-    // disp_drv.full_refresh = 1;
-
     /* When using a monochrome display we need to register the callbacks:
      * - rounder_cb
      * - set_px_cb */
-#ifdef CONFIG_LV_TFT_DISPLAY_MONOCHROME
+#ifdef CONFIG_LV_TFT_DISPLAY_E_INK
     disp_drv.rounder_cb = disp_driver_rounder;
     disp_drv.set_px_cb  = disp_driver_set_px;
+    disp_drv.full_refresh = true;
 #endif
 
     disp_drv.draw_buf = &draw_buf_dsc_2;
