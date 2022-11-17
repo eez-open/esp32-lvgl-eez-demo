@@ -40,8 +40,8 @@
 //#endif
 
 #ifdef CONFIG_LV_TFT_DISPLAY_E_INK
-  #define MY_DISP_HOR_RES 400 /* 240 */
-  #define MY_DISP_VER_RES 300 /* 320 */
+  #define MY_DISP_HOR_RES 800 /* 240 */
+  #define MY_DISP_VER_RES 600 /* 320 */
   #define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * MY_DISP_VER_RES * 1) /* 10240 */
 #else
   #define MY_DISP_HOR_RES 320 /* 240 */
@@ -110,14 +110,14 @@ void lv_port_disp_init(void)
 
     /* static lv_color_t * */
     buf1 = heap_caps_malloc(DISP_BUF_SIZE_CUSTOM * sizeof(lv_color_t),
-                            MALLOC_CAP_DMA | MALLOC_CAP_8BIT /* MALLOC_CAP_DMA */);
+                            MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT /* MALLOC_CAP_DMA */);
     assert(buf1 != NULL);
 
     /* Use double buffered when not working with monochrome displays */
 #ifndef CONFIG_LV_TFT_DISPLAY_E_INK
     /* static lv_color_t * */
     buf2 = heap_caps_malloc(DISP_BUF_SIZE_CUSTOM * sizeof(lv_color_t),
-                            MALLOC_CAP_DMA | MALLOC_CAP_8BIT /* MALLOC_CAP_DMA */);
+                            MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT /* MALLOC_CAP_DMA */);
     assert(buf2 != NULL);
 #else
     static lv_color_t *buf2 = NULL;

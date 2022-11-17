@@ -6,5 +6,13 @@
   },
   "idf.adapterTargetName": "esp32",
   "idf.flashType": "UART",
-  "idf.port": "/dev/ttyUSB0"
+  "idf.port": "/dev/ttyUSB0",
+  "files.associations": {
+    "*.ipp": "cpp",
+    "*.tcc": "cpp",
+    "atomic": "cpp",
+    "iomanip": "cpp",
+    "istream": "cpp",
+    "ostream": "cpp"
+  }
 }
