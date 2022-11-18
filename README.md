@@ -13,7 +13,12 @@ https://github.com/eez-open/studio
 ### Using this repo
 
 
-Go inside you ESP IDF instalation folder and run
+if you do not have ESP IDF check here how to install
+You can use v4.4.3 
+
+https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/#linux-and-macos
+
+Go inside you ESP IDF instalation folder and run 
 
 ```
 . export.sh
@@ -41,6 +46,7 @@ chmod +x prepare.sh
 ```
 
 Run build and flash for inkplate 6 as this is set as current default
+
 Make sure you inkplate is connected and powered on
 
 ```
