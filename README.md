@@ -46,6 +46,7 @@ chmod +x prepare.sh
 ```
 
 Run build and flash for inkplate 6 as this is set as current default
+
 Make sure you inkplate is connected and powered on
 
 ```
