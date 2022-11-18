@@ -67,7 +67,7 @@
           "template": "#ifndef EEZ_LVGL_UI_FONTS_H\r\n#define EEZ_LVGL_UI_FONTS_H\r\n\r\n#include \"lvgl/lvgl.h\"\r\n\r\n//${eez-studio LVGL_FONTS_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_FONTS_H*/"
         }
       ],
-      "destinationFolder": "../../components/lvgl/demos/eez"
+      "destinationFolder": "../../../../esp32-lvgl-eez-demo/components/lvgl/demos/eez"
     }
   },
   "variables": {
