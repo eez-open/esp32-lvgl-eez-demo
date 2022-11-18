@@ -10,6 +10,25 @@ https://github.com/eez-open/eez-framework
 
 https://github.com/eez-open/studio
 
+### Using this repo
+
+```
+# Go inside you ESP IDF folder and run
+. export.sh
+# now go to folder where you want this priject to be and clone this repo
+git clone --recurse-submodules https://github.com/goran-mahovlic/esp32-lvgl-eez-demo.git
+# go to the newly created folder
+cd esp32-lvgl-eez-demo
+# Copy CMakeLists to CalEPD folder
+# cp config/CalEPD_CMakeLists.txt components/CalEPD/CMakeLists.txt 
+# or you can also run prepare.sh
+chmod +x prepare.sh
+./prepare.sh
+# Run build and flash for inkplate 6 as this is set as current default
+# make shure you inkplate is connected and powered on
+idf.py build; idf.py -p /dev/ttyUSB0 flash monitor
+```
+
 ### Example EEZ GUI with ESP32 using LVGL
 
 ![Example EEZ GUI with ESP32 using LVGL](images/eez_lvgl.jpg)
