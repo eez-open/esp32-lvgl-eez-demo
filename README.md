@@ -13,7 +13,7 @@ https://github.com/eez-open/studio
 ### Using this repo
 
 
-Go inside you ESP IDF folder and run
+Go inside you ESP IDF instalation folder and run
 
 ```
 . export.sh
