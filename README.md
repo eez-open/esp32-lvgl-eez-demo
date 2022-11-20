@@ -37,8 +37,8 @@ cd esp32-lvgl-eez-demo
 ```
 
 Copy CMakeLists to CalEPD folder
-cp config/CalEPD_CMakeLists.txt components/CalEPD/CMakeLists.txt 
-or you can also run prepare.sh
+cp configs/CalEPD_CMakeLists.txt components/CalEPD/CMakeLists.txt 
+or you can yust run prepare.sh
 
 ```
 chmod +x prepare.sh
