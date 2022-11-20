@@ -49,7 +49,7 @@
  *********************/
 #define TAG               "demo"
 #define LV_TICK_PERIOD_MS 1
-#define CONFIG_LV_TFT_DISPLAY_MONOCHROME
+
 /**********************
  *      TYPEDEFS
  **********************/
@@ -123,7 +123,6 @@ static void guiTask(void *pvParameter)
 
     /* Create the demo application */
     ui_init();
-
     while (1) {
         /* Delay 1 tick (assumes FreeRTOS tick is 10ms */
         vTaskDelay(pdMS_TO_TICKS(1));
@@ -131,9 +130,7 @@ static void guiTask(void *pvParameter)
         /* Try to take the semaphore, call lvgl related function on success */
         if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
             lv_task_handler();
-
             ui_tick();
-
             xSemaphoreGive(xGuiSemaphore);
         }
     }
@@ -152,6 +149,7 @@ static void lv_tick_task(void *arg)
 
     lv_tick_inc(LV_TICK_PERIOD_MS);
 }
+
 
 #else /*Enable this file at the top*/
 /*This dummy typedef exists purely to silence -Wpedantic.*/
