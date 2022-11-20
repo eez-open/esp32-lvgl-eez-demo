@@ -1,3 +1,4 @@
 dependencies.lock
 build/
 components/CalEPD/
+*.eez-project-ui-state
