@@ -42,12 +42,14 @@
 #include "lv_port/lv_port.h"
 #include "lvgl/demos/lv_demos.h"
 
+#include "ui/ui.h"
+
 /*********************
  *      DEFINES
  *********************/
 #define TAG               "demo"
 #define LV_TICK_PERIOD_MS 1
-#define CONFIG_LV_TFT_DISPLAY_MONOCHROME
+
 /**********************
  *      TYPEDEFS
  **********************/
@@ -57,9 +59,6 @@
  **********************/
 static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
-#ifndef CONFIG_LV_USE_DEMO_EEZ
-static void create_demo_application(void);
-#endif
 
 /**********************
  *  STATIC VARIABLES
@@ -123,12 +122,7 @@ static void guiTask(void *pvParameter)
     ESP_ERROR_CHECK(esp_timer_start_periodic(periodic_timer, LV_TICK_PERIOD_MS * 1000));
 
     /* Create the demo application */
-    #ifdef CONFIG_LV_USE_DEMO_EEZ
-      /*Create a "Hello world!" label*/
-      flowInit();
-    #else
-      create_demo_application();
-    #endif
+    ui_init();
     while (1) {
         /* Delay 1 tick (assumes FreeRTOS tick is 10ms */
         vTaskDelay(pdMS_TO_TICKS(1));
@@ -136,9 +130,7 @@ static void guiTask(void *pvParameter)
         /* Try to take the semaphore, call lvgl related function on success */
         if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
             lv_task_handler();
-            #ifdef CONFIG_LV_USE_DEMO_EEZ
-                flowTick();
-              #endif
+            ui_tick();
             xSemaphoreGive(xGuiSemaphore);
         }
     }
@@ -151,54 +143,13 @@ static void guiTask(void *pvParameter)
     vTaskDelete(NULL);
 }
 
-#ifndef CONFIG_LV_USE_DEMO_EEZ
-static void create_demo_application(void)
-{
-    /* When using a monochrome display we only show "Hello World" centered on the
-     * screen */
-#if defined CONFIG_LV_TFT_DISPLAY_MONOCHROME || \
-    defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S || \
-    defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8151D
-    lv_obj_t *obj = lv_obj_create(0);
-    lv_obj.main = obj;
-    lv_obj_set_pos(obj, 0, 0);
-    lv_obj_set_size(obj, 400, 300);
-    {
-        lv_obj_t *parent_obj = obj;
-        {
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            lv_obj_set_pos(obj, 0, 0);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_label_set_text(obj, "Hello, world!");
-        }
-    }
-
-#else
-    /* Otherwise we show the selected demo */
-#if defined   CONFIG_LV_USE_DEMO_WIDGETS
-    lv_demo_widgets();
-#elif defined CONFIG_LV_USE_DEMO_KEYPAD_AND_ENCODER
-    lv_demo_keypad_encoder();
-#elif defined CONFIG_LV_USE_DEMO_EEZ
-    lv_demo_eez();
-#elif defined CONFIG_LV_USE_DEMO_BENCHMARK
-    lv_demo_benchmark();
-#elif defined CONFIG_LV_USE_DEMO_STRESS
-    lv_demo_stress();
-#elif defined CONFIG_LV_USE_DEMO_MUSIC
-    lv_demo_music();
-#else
-#error "No demo application selected."
-#endif
-#endif
-}
-#endif
 static void lv_tick_task(void *arg)
 {
     (void)arg;
 
     lv_tick_inc(LV_TICK_PERIOD_MS);
 }
+
 
 #else /*Enable this file at the top*/
 /*This dummy typedef exists purely to silence -Wpedantic.*/

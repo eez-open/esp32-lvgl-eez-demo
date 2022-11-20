@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 20 px
  * Bpp: 8
- * Opts: --enable-crashpad --enable-crash-reporter=bce393e5-31c5-48aa-87bb-274fb8aadd66,no_channel --user-data-dir=/home/mistery/.config/eezstudio --app-path=/tmp/.mount_EEZ-StMBPzvc/resources/app.asar --no-sandbox --no-zygote --node-integration-in-worker --lang=en-GB --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=58112153426 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=0,i,3053523335931175565,5926356274994754522,131072 --disable-features=SpareRendererForSitePerProcess --enable-crashpad
+ * Opts: --user-data-dir=C:\Users\mvladic\AppData\Roaming\eezstudio --app-path=C:\work\eez\studio --no-sandbox --no-zygote --node-integration-in-worker --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --launch-time-ticks=261235782612 --mojo-platform-channel-handle=2612 --field-trial-handle=1692,i,18392024636065712801,4988683857087993303,131072 --disable-features=SpareRendererForSitePerProcess,WinRetrieveSuggestionsOnlyOnDemand /prefetch:1
  ******************************************************************************/
 
 #ifdef LV_LVGL_H_INCLUDE_SIMPLE
@@ -10,11 +10,11 @@
 #include "lvgl/lvgl.h"
 #endif
 
-#ifndef UI_FONT_MONTSERRAT_SEMI_BOLD_20
-#define UI_FONT_MONTSERRAT_SEMI_BOLD_20 1
+#ifndef UI_FONT_MONTSERRAT_SEMI_BOLD_20_A
+#define UI_FONT_MONTSERRAT_SEMI_BOLD_20_A 1
 #endif
 
-#if UI_FONT_MONTSERRAT_SEMI_BOLD_20
+#if UI_FONT_MONTSERRAT_SEMI_BOLD_20_A
 
 /*-----------------
  *    BITMAPS
@@ -2576,9 +2576,9 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
 
 /*Initialize a public general font descriptor*/
 #if LV_VERSION_CHECK(8, 0, 0)
-const lv_font_t ui_font_montserrat_semi_bold_20 = {
+const lv_font_t ui_font_montserrat_semi_bold_20_a = {
 #else
-lv_font_t ui_font_montserrat_semi_bold_20 = {
+lv_font_t ui_font_montserrat_semi_bold_20_a = {
 #endif
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
@@ -2596,5 +2596,5 @@ lv_font_t ui_font_montserrat_semi_bold_20 = {
 
 
 
-#endif /*#if UI_FONT_MONTSERRAT_SEMI_BOLD_20*/
+#endif /*#if UI_FONT_MONTSERRAT_SEMI_BOLD_20_A*/
 
