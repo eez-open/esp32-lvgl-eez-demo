@@ -2,18 +2,24 @@
 
 file(GLOB_RECURSE SOURCES_C *.c
                             ./lv_port/*.c
+                            ./ui/*.c
+                            ./eez/**/*.cpp
                             lvgl/**/*.cpp
                             lvgl/demos/**/*.c
                             lvgl/demos/**/*.cpp
                             )
 file(GLOB_RECURSE SOURCES_CPP *.cpp)
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DEEZ_PLATFORM_SIMULATOR -DEEZ_FOR_LVGL -DEEZ_OPTION_GUI=0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEEZ_PLATFORM_SIMULATOR -DEEZ_FOR_LVGL -DEEZ_OPTION_GUI=0")
+
 idf_component_register(
     SRCS ${SOURCES_C} ${SOURCES_CPP}
     INCLUDE_DIRS    "."
+                    ./eez/libs/agg 
+                    ./eez/platform/simulator 
+                    ./eez-conf
                     ./lv_port
     REQUIRES        lvgl
                     lvgl_esp32_drivers
     )
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I../components/lvgl/demos/eez")

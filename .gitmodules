@@ -17,3 +17,6 @@
 [submodule "components/CalEPD"]
 	path = components/CalEPD
 	url = https://github.com/martinberlin/CalEPD.git
+[submodule "main/eez"]
+	path = main/eez
+	url = https://github.com/eez-open/eez-framework
