@@ -6,3 +6,6 @@ cp -r ./examples/Generic ./main
 
 echo "Copy ./examples/Heltec to ./main"
 cp -rT ./examples/Heltec ./main
+
+echo "Copy ./examples/ILI9341_240x320/sdkconfig to ./sdkconfig"
+cp ./examples/Heltec/sdkconfig ./sdkconfig
