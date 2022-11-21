@@ -12,74 +12,74 @@ https://github.com/eez-open/studio
 
 ### Using this repo
 
-
-if you do not have ESP IDF check here how to install
-You can use v4.4.3 
+If you do not have ESP IDF check here how to install (you can use v4.4.3):
 
 https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32/get-started/index.html
 
-Go inside you ESP IDF instalation folder and run 
+Go inside you ESP IDF instalation folder and run:
 
 ```
 . export.sh
 ```
 
-Now go to folder where you want this priject to be and clone this repo
+Now, go to the folder where you want this project to be and clone this repo:
 
 ```
 git clone --recurse-submodules https://github.com/goran-mahovlic/esp32-lvgl-eez-demo.git
 ```
 
-Go to the newly created folder
+Go to the newly created folder:
 
 ```
 cd esp32-lvgl-eez-demo
 ```
 
-Copy CMakeLists to CalEPD folder
+Copy CMakeLists to CalEPD folder:
+
+```
 cp configs/CalEPD_CMakeLists.txt components/CalEPD/CMakeLists.txt 
-or you can yust run prepare.sh
+```
+
+or you can yust run prepare.sh:
 
 ```
 chmod +x prepare.sh
 ./prepare.sh
 ```
 
-Run build and flash for inkplate 6 as this is set as current default
+Select example project according to your display board. For example, if you have Inkplate6, execute following:
 
-Make sure you inkplate is connected and powered on
+```
+./examples/Inkplate6/use.sh
+```
 
-Skip this if you want other display!
+Make sure your inkplate board is connected and powered on and start IDF build and flash:
 
 ```
 idf.py build; idf.py -p /dev/ttyUSB0 flash monitor
 ```
 
-For other display like ILI9341 run 
+If you want to try some other display board then, again, first select example for that board, for example for ILI9341:
 
 ```
-./use_ESP32_ILI9341_240x320.sh
+./examples/ILI9341_240x320/use.sh
 ```
 
-open main/eez-project/esp32-lvgl-eez-ESP32_ILI9341_240x320/esp32-lvgl-eez-ESP32_ILI9341_240x320.eez-project in studio
-
-build project in studio and run
-
-```
-idf.py build; idf.py -p /dev/ttyUSB0 flash monitor
-```
-
-in console
-
-if you have previews screen build you can clean project with 
+and then start IDF:
 
 ```
 make clean; idf.py fullclean
 ```
 
+To make changes in the GUI, you can open eez-project file, i.e. `examples/Inkplate6/esp32-lvgl-eez-demo-Inkplate6.eez-project` in [EEZ Studio](https://github.com/eez-open/studio). When you are done editing changes, first build within EEZ Studio and then build with IDF.
+
 ### Example EEZ GUI with ESP32 using LVGL
 
 ![Example EEZ GUI with ESP32 using LVGL](images/eez_lvgl.jpg)
+
+![ILI9341 eez-project opened inside EEZ Studio on Windows](images/eez-studio.png)
+
+(Don't worry, EEZ Studio works on Linux and Mac too!)
 
 ### LVGL project for ESP32 with EEZ studio demo
 
