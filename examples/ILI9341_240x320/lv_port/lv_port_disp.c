@@ -36,8 +36,8 @@
 #define TAG "lv_port_disp"
 
 
-#define MY_DISP_HOR_RES 480 /* 240 */
-#define MY_DISP_VER_RES 320 /* 320 */
+#define MY_DISP_HOR_RES 320 /* 240 */
+#define MY_DISP_VER_RES 240 /* 320 */
 
 
 #define DISP_BUF_SIZE_CUSTOM (MY_DISP_HOR_RES * 16) /* 10240 */
