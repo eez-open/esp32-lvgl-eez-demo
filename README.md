@@ -49,8 +49,32 @@ Run build and flash for inkplate 6 as this is set as current default
 
 Make sure you inkplate is connected and powered on
 
+Skip this if you want other display!
+
 ```
 idf.py build; idf.py -p /dev/ttyUSB0 flash monitor
+```
+
+For other display like ILI9341 run 
+
+```
+./use_ESP32_ILI9341_240x320.sh
+```
+
+open main/eez-project/esp32-lvgl-eez-ESP32_ILI9341_240x320/esp32-lvgl-eez-ESP32_ILI9341_240x320.eez-project in studio
+
+build project in studio and run
+
+```
+idf.py build; idf.py -p /dev/ttyUSB0 flash monitor
+```
+
+in console
+
+if you have previews screen build you can clean project with 
+
+```
+make clean; idf.py fullclean
 ```
 
 ### Example EEZ GUI with ESP32 using LVGL
