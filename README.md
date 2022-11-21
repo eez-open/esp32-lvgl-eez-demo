@@ -77,6 +77,10 @@ To make changes in the GUI, you can open eez-project file, i.e. `examples/Inkpla
 
 ![Example EEZ GUI with ESP32 using LVGL](images/eez_lvgl.jpg)
 
+![ILI9341 eez-project opened inside EEZ Studio on Windows](images/eez-studio.png)
+
+(Don't worry, EEZ Studio works on Linux and Mac too!)
+
 ### LVGL project for ESP32 with EEZ studio demo
 
 EEZ demo project is located in eez-project directory - you can open that file with EEZ Studio
