@@ -12,66 +12,58 @@ https://github.com/eez-open/studio
 
 ### Using this repo
 
-If you do not have ESP IDF check here how to install (you can use v4.4.3):
+1) If you do not have ESP IDF check here how to install (you can use v4.4.3):
 
-https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32/get-started/index.html
+    https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32/get-started/index.html
 
-Go inside you ESP IDF instalation folder and run:
+    Go inside you ESP IDF instalation folder and run:
 
-```
-. export.sh
-```
+    ```
+    . export.sh
+    ```
 
-Now, go to the folder where you want this project to be and clone this repo:
+2) Now, go to the folder where you want this project to be and clone this repo:
 
-```
-git clone --recurse-submodules https://github.com/goran-mahovlic/esp32-lvgl-eez-demo.git
-```
+    ```
+    git clone --recurse-submodules https://github.com/goran-mahovlic/esp32-lvgl-eez-demo.git
+    ```
 
-Go to the newly created folder:
+3) Go to the newly created folder:
 
-```
-cd esp32-lvgl-eez-demo
-```
+    ```
+    cd esp32-lvgl-eez-demo
+    ```
 
-Copy CMakeLists to CalEPD folder:
+4) Build example project according to your display board. For example, if you have Inkplate6, execute following:
 
-```
-cp configs/CalEPD_CMakeLists.txt components/CalEPD/CMakeLists.txt 
-```
+    ```
+    ./build.sh Inkplate6
+    ```
 
-or you can yust run prepare.sh:
+5) Make sure your Inkplate6 board is connected and powered, then start flash:
 
-```
-chmod +x prepare.sh
-./prepare.sh
-```
+    ```
+    idf.py -p /dev/ttyUSB0 flash monitor
+    ```
 
-Select example project according to your display board. For example, if you have Inkplate6, execute following:
+- **Note 1** These are build commands for other display boards:
 
-```
-./examples/Inkplate6/use.sh
-```
+    ```
+    ./build.sh Heltec
+    ./build.sh ILI9341_240x320
+    ./build.sh TouchDown
+    
+    etc.
+    
+    ```
 
-Make sure your inkplate board is connected and powered on and start IDF build and flash:
+- **Note 2** You must execute fullbuild.sh when you switch between display boards:
 
-```
-idf.py build; idf.py -p /dev/ttyUSB0 flash monitor
-```
+    ```
+    ./fullbuild.sh Inkplate6
+    ```
 
-If you want to try some other display board then, again, first select example for that board, for example for ILI9341:
-
-```
-./examples/ILI9341_240x320/use.sh
-```
-
-and then start IDF:
-
-```
-make clean; idf.py fullclean
-```
-
-To make changes in the GUI, you can open eez-project file, i.e. `examples/Inkplate6/esp32-lvgl-eez-demo-Inkplate6.eez-project` in [EEZ Studio](https://github.com/eez-open/studio). When you are done editing changes, first build within EEZ Studio and then build with IDF.
+- **Note 3** To make changes in the GUI, you can open eez-project file, i.e. `examples/Inkplate6/esp32-lvgl-eez-demo-Inkplate6.eez-project` in [EEZ Studio](https://github.com/eez-open/studio). When you are done editing changes, first build within Studio and then use `./build Inkplate6` again.
 
 ### Example EEZ GUI with ESP32 using LVGL
 
