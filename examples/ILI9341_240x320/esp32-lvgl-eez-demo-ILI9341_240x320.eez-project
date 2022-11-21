@@ -78,7 +78,7 @@
         {
           "objID": "d1461368-02f7-4740-9979-0da2b1361827",
           "fileName": "vars.c",
-          "template": "#include \"vars.h\"\r\n\r\nvolatile char WIFI_SSID[50] = \"W1_1047581318\";\r\nvolatile char WIFI_PASS[50] = \"\";\r\nvolatile char WIFI_IP[20] = \"\";\r\nvolatile char BB3_IP[20] = \"192.168.100.80\";\r\nvolatile char BB3_RESPONSE[500] = \"\";\r\nvolatile bool BB3_CONNECTED = false;\r\nvolatile bool WIFI_CONNECTED = false;\r\nvolatile bool SCPI_UPDATED = false;\r\nvolatile bool CH1_UPDATE = false;\r\nvolatile bool CH1_POWER_ON = false;\r\nvolatile bool CH2_UPDATE = false;\r\nvolatile bool CH2_POWER_ON = false;\r\n\r\nconst char *get_var_wifi_ssid(){return WIFI_SSID;}\r\nvoid set_var_wifi_ssid(const char *value){}\r\nconst char *get_var_wifi_pass(){return WIFI_PASS;}\r\nvoid set_var_wifi_pass(const char *value){}\r\nconst char *get_var_wifi_ip(){return WIFI_IP;}\r\nvoid set_var_wifi_ip(const char *value){}\r\nbool get_var_wifi_connected(){return WIFI_CONNECTED;}\r\nvoid set_var_wifi_connected(bool value){}\r\nconst char *get_var_bb3_ip(){return BB3_IP;}\r\nvoid set_var_bb3_ip(const char *value){}\r\nbool get_var_bb3_connected(){return BB3_CONNECTED;}\r\nvoid set_var_bb3_connected(bool value){}\r\nbool get_var_scpi_updated(){return SCPI_UPDATED;}\r\nvoid set_var_scpi_updated(bool value){SCPI_UPDATED = value;printf(\"SCPI_UPDATE: %d\\n\", SCPI_UPDATED);}\r\nbool get_var_ch1_update(){return CH1_UPDATE;}\r\nvoid set_var_ch1_update(bool value){CH1_UPDATE = value;printf(\"CH1_UPDATE: %d\\n\", CH1_UPDATE);}\r\nbool get_var_ch1_power_on(){return CH1_POWER_ON;}\r\nvoid set_var_ch1_power_on(bool value){CH1_POWER_ON = value;printf(\"CH1_POWER_ON: %d\\n\", CH1_POWER_ON);}\r\nbool get_var_ch2_update(){return CH2_UPDATE;}\r\nvoid set_var_ch2_update(bool value){CH2_UPDATE = value;printf(\"CH2_UPDATE: %d\\n\", CH2_UPDATE);}\r\nbool get_var_ch2_power_on(){return CH2_POWER_ON;}\r\nvoid set_var_ch2_power_on(bool value){CH2_POWER_ON = value;printf(\"CH2_POWER_ON: %d\\n\", CH2_POWER_ON);}\r\nconst char *get_var_bb3_response(){return BB3_RESPONSE;}\r\nvoid set_var_bb3_response(const char *value){}"
+          "template": "#include \"vars.h\"\r\n\r\nvolatile char WIFI_SSID[50] = \"W1_1047581318\";\r\nvolatile char WIFI_PASS[50] = \"SunceMojeMalo\";\r\nvolatile char WIFI_IP[20] = \"\";\r\nvolatile char BB3_IP[20] = \"192.168.100.80\";\r\nvolatile char BB3_RESPONSE[500] = \"\";\r\nvolatile bool BB3_CONNECTED = false;\r\nvolatile bool WIFI_CONNECTED = false;\r\nvolatile bool SCPI_UPDATED = false;\r\nvolatile bool CH1_UPDATE = false;\r\nvolatile bool CH1_POWER_ON = false;\r\nvolatile bool CH2_UPDATE = false;\r\nvolatile bool CH2_POWER_ON = false;\r\n\r\nconst char *get_var_wifi_ssid(){return WIFI_SSID;}\r\nvoid set_var_wifi_ssid(const char *value){sprintf(WIFI_SSID,value);}\r\nconst char *get_var_wifi_pass(){return WIFI_PASS;}\r\nvoid set_var_wifi_pass(const char *value){sprintf(WIFI_PASS,value);}\r\nconst char *get_var_wifi_ip(){return WIFI_IP;}\r\nvoid set_var_wifi_ip(const char *value){}\r\nbool get_var_wifi_connected(){return WIFI_CONNECTED;}\r\nvoid set_var_wifi_connected(bool value){}\r\nconst char *get_var_bb3_ip(){return BB3_IP;}\r\nvoid set_var_bb3_ip(const char *value){{sprintf(BB3_IP,value);}}\r\nbool get_var_bb3_connected(){return BB3_CONNECTED;}\r\nvoid set_var_bb3_connected(bool value){}\r\nbool get_var_scpi_updated(){return SCPI_UPDATED;}\r\nvoid set_var_scpi_updated(bool value){SCPI_UPDATED = value;printf(\"SCPI_UPDATE: %d\\n\", SCPI_UPDATED);}\r\nbool get_var_ch1_update(){return CH1_UPDATE;}\r\nvoid set_var_ch1_update(bool value){CH1_UPDATE = value;printf(\"CH1_UPDATE: %d\\n\", CH1_UPDATE);}\r\nbool get_var_ch1_power_on(){return CH1_POWER_ON;}\r\nvoid set_var_ch1_power_on(bool value){CH1_POWER_ON = value;printf(\"CH1_POWER_ON: %d\\n\", CH1_POWER_ON);}\r\nbool get_var_ch2_update(){return CH2_UPDATE;}\r\nvoid set_var_ch2_update(bool value){CH2_UPDATE = value;printf(\"CH2_UPDATE: %d\\n\", CH2_UPDATE);}\r\nbool get_var_ch2_power_on(){return CH2_POWER_ON;}\r\nvoid set_var_ch2_power_on(bool value){CH2_POWER_ON = value;printf(\"CH2_POWER_ON: %d\\n\", CH2_POWER_ON);}\r\nconst char *get_var_bb3_response(){return BB3_RESPONSE;}\r\nvoid set_var_bb3_response(const char *value){}"
         }
       ],
       "destinationFolder": "ui"
@@ -796,8 +796,8 @@
           "type": "LVGLActionComponent",
           "left": 359,
           "top": 285,
-          "width": 262,
-          "height": 55,
+          "width": 285,
+          "height": 53,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -816,8 +816,8 @@
           "type": "LVGLActionComponent",
           "left": 356,
           "top": 412,
-          "width": 238,
-          "height": 55,
+          "width": 258,
+          "height": 53,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -836,8 +836,8 @@
           "type": "LVGLActionComponent",
           "left": 359,
           "top": 347,
-          "width": 232,
-          "height": 55,
+          "width": 251,
+          "height": 53,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -1780,6 +1780,7 @@
                   },
                   "hiddenInEditor": false,
                   "timeline": [],
+                  "identifier": "lbl_CH2_STATUS",
                   "leftUnit": "px",
                   "topUnit": "px",
                   "widthUnit": "content",
@@ -1875,6 +1876,7 @@
                   },
                   "hiddenInEditor": false,
                   "timeline": [],
+                  "identifier": "lbl_CH1_STATUS",
                   "leftUnit": "px",
                   "topUnit": "px",
                   "widthUnit": "content",
@@ -2309,7 +2311,7 @@
         {
           "objID": "7fc8675c-713b-4d42-9f8e-76cbee1ea99a",
           "type": "SetVariableActionComponent",
-          "left": 353,
+          "left": 257,
           "top": -168,
           "width": 236,
           "height": 95,
@@ -2337,8 +2339,8 @@
         {
           "objID": "8ec25a73-3f4d-476a-f29d-c9d5e194c2a2",
           "type": "SetVariableActionComponent",
-          "left": 413,
-          "top": 24,
+          "left": 348,
+          "top": 0,
           "width": 236,
           "height": 95,
           "customInputs": [],
@@ -2364,8 +2366,8 @@
         {
           "objID": "381b887e-5c28-49a7-bc77-d40108f06e29",
           "type": "LogActionComponent",
-          "left": 713,
-          "top": -180,
+          "left": 552,
+          "top": -196,
           "width": 97,
           "height": 53,
           "customInputs": [],
@@ -2376,8 +2378,8 @@
         {
           "objID": "8a32d60a-a447-40d8-bd4e-b1a7ad28b7cb",
           "type": "LogActionComponent",
-          "left": 713,
-          "top": -286,
+          "left": 552,
+          "top": -302,
           "width": 97,
           "height": 53,
           "customInputs": [],
@@ -2388,8 +2390,8 @@
         {
           "objID": "6ec9cf6e-1275-4397-b62e-a583f2cc80a4",
           "type": "LogActionComponent",
-          "left": 713,
-          "top": -233,
+          "left": 552,
+          "top": -249,
           "width": 87,
           "height": 53,
           "customInputs": [],
@@ -2400,8 +2402,8 @@
         {
           "objID": "bf045d4e-827f-4673-f6a1-eebb4e7484d4",
           "type": "LogActionComponent",
-          "left": 752,
-          "top": 106,
+          "left": 700,
+          "top": 90,
           "width": 97,
           "height": 53,
           "customInputs": [],
@@ -2412,8 +2414,8 @@
         {
           "objID": "e5389a4f-17cc-46d5-df4d-7e25be40061f",
           "type": "LogActionComponent",
-          "left": 752,
-          "top": 0,
+          "left": 700,
+          "top": -18,
           "width": 97,
           "height": 53,
           "customInputs": [],
@@ -2424,14 +2426,124 @@
         {
           "objID": "c2ff6669-652c-4322-ba08-62014bbf5f5c",
           "type": "LogActionComponent",
-          "left": 752,
-          "top": 53,
+          "left": 705,
+          "top": 35,
           "width": 87,
           "height": 53,
           "customInputs": [],
           "customOutputs": [],
           "catchError": false,
           "value": "CH2_UPDATE"
+        },
+        {
+          "objID": "7aa99f61-3d53-461b-fd5c-0ee6de0865ec",
+          "type": "LVGLActionComponent",
+          "left": 713,
+          "top": -157,
+          "width": 236,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "ea8e3d0a-687d-4110-adce-616c4d18ed7c",
+              "action": "SET_PROPERTY",
+              "targetType": "label",
+              "target": "lbl_CH1_STATUS",
+              "property": "text",
+              "animated": false,
+              "value": "CH1 OFF",
+              "valueType": "literal"
+            }
+          ]
+        },
+        {
+          "objID": "c680e517-0fab-4dee-e05c-d1dfbe5a9813",
+          "type": "IsTrueActionComponent",
+          "left": 552,
+          "top": -143,
+          "width": 129,
+          "height": 70,
+          "customInputs": [],
+          "customOutputs": [],
+          "value": "CH1_POWER_ON"
+        },
+        {
+          "objID": "cbb1c2e0-fd6a-4670-a044-0123f574f473",
+          "type": "LVGLActionComponent",
+          "left": 713,
+          "top": -84,
+          "width": 229,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "ea8e3d0a-687d-4110-adce-616c4d18ed7c",
+              "action": "SET_PROPERTY",
+              "targetType": "label",
+              "target": "lbl_CH1_STATUS",
+              "property": "text",
+              "animated": false,
+              "value": "CH1 ON",
+              "valueType": "literal"
+            }
+          ]
+        },
+        {
+          "objID": "0a49a143-3900-47bf-adad-784315eae368",
+          "type": "LVGLActionComponent",
+          "left": 943,
+          "top": 180,
+          "width": 236,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "ea8e3d0a-687d-4110-adce-616c4d18ed7c",
+              "action": "SET_PROPERTY",
+              "targetType": "label",
+              "target": "lbl_CH2_STATUS",
+              "property": "text",
+              "animated": false,
+              "value": "CH2 OFF",
+              "valueType": "literal"
+            }
+          ]
+        },
+        {
+          "objID": "701a432e-40a8-43a5-8083-b1c10b893a14",
+          "type": "IsTrueActionComponent",
+          "left": 766,
+          "top": 179,
+          "width": 129,
+          "height": 70,
+          "customInputs": [],
+          "customOutputs": [],
+          "value": "CH2_POWER_ON"
+        },
+        {
+          "objID": "94996507-4cdb-4c82-80d0-a5728c888d36",
+          "type": "LVGLActionComponent",
+          "left": 943,
+          "top": 235,
+          "width": 229,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "ea8e3d0a-687d-4110-adce-616c4d18ed7c",
+              "action": "SET_PROPERTY",
+              "targetType": "label",
+              "target": "lbl_CH2_STATUS",
+              "property": "text",
+              "animated": false,
+              "value": "CH2 ON",
+              "valueType": "literal"
+            }
+          ]
         }
       ],
       "connectionLines": [
@@ -2503,6 +2615,48 @@
           "source": "8ec25a73-3f4d-476a-f29d-c9d5e194c2a2",
           "output": "@seqout",
           "target": "bf045d4e-827f-4673-f6a1-eebb4e7484d4",
+          "input": "@seqin"
+        },
+        {
+          "objID": "de1b3d2a-8d14-4ab2-998e-88d2f97c6a14",
+          "source": "c680e517-0fab-4dee-e05c-d1dfbe5a9813",
+          "output": "True",
+          "target": "7aa99f61-3d53-461b-fd5c-0ee6de0865ec",
+          "input": "@seqin"
+        },
+        {
+          "objID": "6c854a18-046b-4990-b246-844873205f38",
+          "source": "c680e517-0fab-4dee-e05c-d1dfbe5a9813",
+          "output": "False",
+          "target": "cbb1c2e0-fd6a-4670-a044-0123f574f473",
+          "input": "@seqin"
+        },
+        {
+          "objID": "c66accbe-38b5-4dab-d086-abcebd684557",
+          "source": "7fc8675c-713b-4d42-9f8e-76cbee1ea99a",
+          "output": "@seqout",
+          "target": "c680e517-0fab-4dee-e05c-d1dfbe5a9813",
+          "input": "@seqin"
+        },
+        {
+          "objID": "6ad7f1df-fb80-4b1a-858a-3279231ab8f3",
+          "source": "701a432e-40a8-43a5-8083-b1c10b893a14",
+          "output": "True",
+          "target": "0a49a143-3900-47bf-adad-784315eae368",
+          "input": "@seqin"
+        },
+        {
+          "objID": "5acc1b9d-0793-4c80-ed94-e3f01907adb9",
+          "source": "701a432e-40a8-43a5-8083-b1c10b893a14",
+          "output": "False",
+          "target": "94996507-4cdb-4c82-80d0-a5728c888d36",
+          "input": "@seqin"
+        },
+        {
+          "objID": "8d3c8486-e057-4216-e51d-47bc51fce1b1",
+          "source": "8ec25a73-3f4d-476a-f29d-c9d5e194c2a2",
+          "output": "@seqout",
+          "target": "701a432e-40a8-43a5-8083-b1c10b893a14",
           "input": "@seqin"
         }
       ],
@@ -2618,9 +2772,9 @@
                 {
                   "objID": "2a11cf81-72de-400f-a75a-0e0b79596c50",
                   "type": "LVGLLabelWidget",
-                  "left": 4,
+                  "left": -4,
                   "top": 7,
-                  "width": 62,
+                  "width": 79,
                   "height": 16,
                   "customInputs": [],
                   "customOutputs": [],
@@ -2647,7 +2801,7 @@
                     "objID": "4505cd13-229f-489e-cf6d-ff6d85ef8ed0"
                   },
                   "eventHandlers": [],
-                  "text": "Connect",
+                  "text": "Reconnect",
                   "textType": "literal",
                   "longMode": "WRAP",
                   "recolor": false
@@ -3715,6 +3869,90 @@
               "textType": "expression",
               "longMode": "WRAP",
               "recolor": false
+            },
+            {
+              "objID": "408130f6-1830-48ee-c29a-ce8d97a95ad7",
+              "type": "LVGLButtonWidget",
+              "left": 200,
+              "top": 171,
+              "width": 100,
+              "height": 50,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "272dba2b-2c8a-449e-bd60-f524e7dd0686",
+                "inheritFrom": "default"
+              },
+              "hiddenInEditor": false,
+              "timeline": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "0a9be292-1c70-4113-8764-8e12020030a4",
+                  "type": "LVGLLabelWidget",
+                  "left": 14,
+                  "top": 7,
+                  "width": 42,
+                  "height": 16,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "e63c8b12-681b-4c24-e1bf-c2f6e788a803",
+                    "inheritFrom": "default"
+                  },
+                  "hiddenInEditor": false,
+                  "timeline": [],
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "flags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "scrollbarMode": "auto",
+                  "scrollDirection": "all",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "localStyles": {
+                    "objID": "4505cd13-229f-489e-cf6d-ff6d85ef8ed0"
+                  },
+                  "eventHandlers": [],
+                  "text": "Set IP",
+                  "textType": "literal",
+                  "longMode": "WRAP",
+                  "recolor": false
+                }
+              ],
+              "flags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLL_ELASTIC|SCROLL_ON_FOCUS|SCROLL_MOMENTUM|SCROLL_CHAIN",
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "scrollbarMode": "auto",
+              "scrollDirection": "all",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "9066f427-0ef3-4554-ffbf-06baab7014c2",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "bg_color": "#d321f3",
+                      "bg_grad_color": "#9e00ff",
+                      "bg_grad_dir": "HOR",
+                      "border_color": "#000000",
+                      "border_width": 2,
+                      "radius": 20
+                    }
+                  }
+                }
+              },
+              "eventHandlers": []
             }
           ],
           "flags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN",

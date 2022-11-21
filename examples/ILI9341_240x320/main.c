@@ -30,10 +30,10 @@ static const char *CH1_OFF = "OUTP OFF, CH1\n";
 static const char *CH2_ON = "OUTP ON, CH2\n";
 static const char *CH2_OFF = "OUTP OFF, CH2\n";
 
-extern volatile char WIFI_SSID[50];
-extern volatile char WIFI_PASS[50];
-extern volatile char WIFI_IP[20];
-extern volatile char BB3_IP[20];
+extern volatile char WIFI_SSID[];
+extern volatile char WIFI_PASS[];
+extern volatile char WIFI_IP[];
+extern volatile char BB3_IP[];
 extern volatile bool BB3_CONNECTED;
 extern volatile bool WIFI_CONNECTED;
 extern volatile bool SCPI_UPDATED;
@@ -128,48 +128,15 @@ void wifiInit()
   ESP_ERROR_CHECK(esp_wifi_start());
 }
 
-
-void OnConnected(void *para)
-{
-  while (true)
-  {
-    if (xSemaphoreTake(connectionSemaphore, 10000 / portTICK_RATE_MS))
-    {
-      ESP_LOGI(TAG, "connected");
-      WIFI_CONNECTED = true;
-      // do something
-      tcpip_adapter_ip_info_t ip_info;
-      ESP_ERROR_CHECK(tcpip_adapter_get_ip_info(TCPIP_ADAPTER_IF_STA, &ip_info));
-      printf("IP Addresss: %s\n", ip4addr_ntoa(&ip_info.ip));
-      printf("Subnet Mask: %s\n", ip4addr_ntoa(&ip_info.netmask));
-      printf("Gateway: %s\n", ip4addr_ntoa(&ip_info.ip));
-
-      xSemaphoreTake(connectionSemaphore, portMAX_DELAY);
-    }
-    else
-    {
-      WIFI_CONNECTED = false;
-      ESP_LOGE(TAG, "Failed to connect. Retry in");
-      for (int i = 0; i < 5; i++)
-      {
-        ESP_LOGE(TAG, "...%d", i);
-        vTaskDelay(1000 / portTICK_RATE_MS);
-      }
-      esp_restart(); // si no hay conexion reiniciar el chip.
-    }
-  }
-}
-
 static void tcp_client_task(void *pvParameters)
 {
-
-
     char rx_buffer[128];
     char host_ip[] = HOST_IP_ADDR;
     int addr_family = 0;
     int ip_protocol = 0;
-
     while (1) {
+      if(SCPI_UPDATED){
+    printf("SCPI update: ");
       if (WIFI_CONNECTED == true){
 #if defined(CONFIG_EXAMPLE_IPV4)
         struct sockaddr_in dest_addr;
@@ -187,24 +154,29 @@ static void tcp_client_task(void *pvParameters)
         if (sock < 0) {
             ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
             BB3_CONNECTED = false;
-            break;
+            SCPI_UPDATED= false;
+            //break;
         }
-        ESP_LOGI(TAG, "Socket created, connecting to %s:%d", host_ip, PORT);
-
+        else{
+          ESP_LOGI(TAG, "Socket created, connecting to %s:%d", host_ip, PORT);
+          BB3_CONNECTED = true;
+        }
         int err = connect(sock, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
         if (err != 0) {
             ESP_LOGE(TAG, "Socket unable to connect: errno %d", errno);
             BB3_CONNECTED = false;
-            break;
+            SCPI_UPDATED= false;
+            //break;
         }
-        ESP_LOGI(TAG, "Successfully connected\n");
-
+        else{
+          ESP_LOGI(TAG, "Successfully connected\n");
+          BB3_CONNECTED = true;
+        }
+      if (BB3_CONNECTED){
         while (1) {
             int err = 0;
             BB3_CONNECTED = true;
             printf("Connected to BB3 and waiting for SCPI commands\n");
-            if(SCPI_UPDATED){
-              printf("SCPI update: ");
               SCPI_UPDATED = false;
               if(CH1_UPDATE){
                 printf("CH1 update\n\r");
@@ -228,7 +200,7 @@ static void tcp_client_task(void *pvParameters)
             if (err < 0) {
                 BB3_CONNECTED = false;
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-                break;
+              //  break;
             }
 
             int len = recv(sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
@@ -236,7 +208,7 @@ static void tcp_client_task(void *pvParameters)
             if (len < 0) {
                 ESP_LOGE(TAG, "recv failed: errno %d", errno);
                 BB3_CONNECTED = false;
-                break;
+               // break;
             }
             // Data received
             else {
@@ -245,19 +217,58 @@ static void tcp_client_task(void *pvParameters)
                 ESP_LOGI(TAG, "Received %d bytes from %s:", len, host_ip);
                 ESP_LOGI(TAG, "%s", rx_buffer);
             }
-            }
-            vTaskDelay(1000 / portTICK_RATE_MS);
+            //}
+            vTaskDelay(200 / portTICK_RATE_MS);
         }
+      }
         if (sock != -1) {
             ESP_LOGE(TAG, "Shutting down socket and restarting...");
             BB3_CONNECTED = false;
             shutdown(sock, 0);
             close(sock);
         }
+            BB3_CONNECTED = false;
+            shutdown(sock, 0);
+            close(sock);
     }
 
 }
-vTaskDelay(1000 / portTICK_RATE_MS);
+vTaskDelay(200 / portTICK_RATE_MS);
+}
+}
+
+
+void OnConnected(void *para)
+{
+  while (true)
+  {
+    if (xSemaphoreTake(connectionSemaphore, 10000 / portTICK_RATE_MS))
+    {
+      ESP_LOGI(TAG, "connected");
+      WIFI_CONNECTED = true;
+      // do something
+      tcpip_adapter_ip_info_t ip_info;
+      ESP_ERROR_CHECK(tcpip_adapter_get_ip_info(TCPIP_ADAPTER_IF_STA, &ip_info));
+      printf("IP Addresss: %s\n", ip4addr_ntoa(&ip_info.ip));
+      printf("Subnet Mask: %s\n", ip4addr_ntoa(&ip_info.netmask));
+      printf("Gateway: %s\n", ip4addr_ntoa(&ip_info.ip));
+      sprintf(WIFI_IP,ip4addr_ntoa(&ip_info.ip));
+      printf("IP: %s\n", WIFI_IP);
+      xTaskCreatePinnedToCore(&tcp_client_task, "tcp_client_task", 4096 * 2,NULL,10,NULL, 1 );
+      xSemaphoreTake(connectionSemaphore, portMAX_DELAY);
+    }
+    else
+    {
+      WIFI_CONNECTED = false;
+      ESP_LOGE(TAG, "Failed to connect. Retry in");
+      for (int i = 0; i < 10000; i++)
+      {
+        ESP_LOGE(TAG, "...%d", i);
+        vTaskDelay(1000 / portTICK_RATE_MS);
+      }
+      esp_restart(); // si no hay conexion reiniciar el chip.
+    }
+  }
 }
 
 /**********************
@@ -277,5 +288,4 @@ void app_main()
     connectionSemaphore = xSemaphoreCreateBinary();
     wifiInit();
     xTaskCreate(&OnConnected, "handel comms", 1024 * 3, NULL, 5, NULL); 
-    xTaskCreatePinnedToCore(&tcp_client_task, "tcp_client_task", 4096 * 2,NULL,10,NULL, 1 );
 }
