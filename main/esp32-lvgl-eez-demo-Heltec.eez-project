@@ -8,8 +8,8 @@
       "projectType": "lvgl",
       "imports": [],
       "flowSupport": true,
-      "displayWidth": 480,
-      "displayHeight": 320
+      "displayWidth": 128,
+      "displayHeight": 64
     },
     "build": {
       "objID": "72794a43-a0fc-13c2-7eb5-67dd952141a4",
@@ -66,17 +66,17 @@
           "template": "#ifndef EEZ_LVGL_UI_FONTS_H\r\n#define EEZ_LVGL_UI_FONTS_H\r\n\r\n#include \"lvgl/lvgl.h\"\r\n\r\n//${eez-studio LVGL_FONTS_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_FONTS_H*/"
         },
         {
-          "objID": "69e953fd-defd-4cd8-9006-3455367bf50e",
+          "objID": "1426a534-b0c3-434a-83ca-58186a60825c",
           "fileName": "ui.h",
           "template": "#ifndef EEZ_LVGL_UI_GUI_H\n#define EEZ_LVGL_UI_GUI_H\n\n#include <eez/flow/lvgl_api.h>\n\nvoid ui_init();\nvoid ui_tick();\n\n#endif // EEZ_LVGL_UI_GUI_H"
         },
         {
-          "objID": "3f1ef63d-7375-40e9-edf9-eb22754173ea",
+          "objID": "687dd8e6-0965-4e8b-c1ca-c617318e599b",
           "fileName": "ui.c",
           "template": "#include \"ui.h\"\n#include \"screens.h\"\n#include \"images.h\"\n#include \"flow_def.h\"\n\nvoid ui_init() {\n    eez_flow_init(assets, sizeof(assets), (lv_obj_t **)&objects, sizeof(objects), images, sizeof(images));\n}\n\nvoid ui_tick() {\n    eez_flow_tick();\n    tick_screen(g_currentScreen);\n}\n"
         }
       ],
-      "destinationFolder": "..\\..\\ui"
+      "destinationFolder": "ui"
     }
   },
   "variables": {
@@ -91,16 +91,16 @@
       "objID": "4b40eba7-b31a-468a-b887-11dfd0b6637f",
       "components": [
         {
-          "objID": "8a890667-8156-4e96-b949-032fe87fce08",
+          "objID": "4e652728-6ae2-4279-e31a-2d32635724bb",
           "type": "LVGLPanelWidget",
           "left": 0,
           "top": 0,
-          "width": 480,
-          "height": 320,
+          "width": 128,
+          "height": 64,
           "customInputs": [],
           "customOutputs": [],
           "style": {
-            "objID": "9e8ec68d-f4b5-44a9-85dd-8dfe5e8f5066",
+            "objID": "ba4a0457-16e2-4307-b6ee-26c92ff7d7e4",
             "inheritFrom": "default"
           },
           "timeline": [],
@@ -110,11 +110,11 @@
           "heightUnit": "px",
           "children": [
             {
-              "objID": "6b272cb8-48b4-467f-c130-a1edc1f930b7",
+              "objID": "48a4ecec-32cc-43e3-d623-e1c140900031",
               "type": "LVGLLabelWidget",
-              "left": 178,
-              "top": 134,
-              "width": 89,
+              "left": -11,
+              "top": 14,
+              "width": 120,
               "height": 16,
               "customInputs": [],
               "customOutputs": [],
@@ -141,13 +141,142 @@
                 "definition": {
                   "MAIN": {
                     "DEFAULT": {
-                      "align": "DEFAULT"
+                      "text_color": "#000000"
                     }
                   }
                 }
               },
               "eventHandlers": [],
-              "text": "Hello, world!",
+              "text": "EEZ Studio LVGL",
+              "textType": "literal",
+              "longMode": "WRAP",
+              "recolor": false
+            },
+            {
+              "objID": "058771e5-d9af-4392-b16a-ff9f8794fbc2",
+              "type": "LVGLLabelWidget",
+              "left": -2,
+              "top": -2,
+              "width": 102,
+              "height": 16,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "a9bf737e-205d-4003-aae9-0ca3b6710d43",
+                "inheritFrom": "default"
+              },
+              "timeline": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "flags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "scrollbarMode": "auto",
+              "scrollDirection": "all",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "b70b99db-02c2-420a-cbdf-e6366dc84e67",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_color": "#000000"
+                    }
+                  }
+                }
+              },
+              "eventHandlers": [],
+              "text": "Heltec Lora 32",
+              "textType": "literal",
+              "longMode": "WRAP",
+              "recolor": false
+            },
+            {
+              "objID": "6b272cb8-48b4-467f-c130-a1edc1f930b7",
+              "type": "LVGLLabelWidget",
+              "left": 27,
+              "top": -15,
+              "width": 44,
+              "height": 16,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "a9bf737e-205d-4003-aae9-0ca3b6710d43",
+                "inheritFrom": "default"
+              },
+              "timeline": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "flags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "scrollbarMode": "auto",
+              "scrollDirection": "all",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "b70b99db-02c2-420a-cbdf-e6366dc84e67",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_color": "#000000"
+                    }
+                  }
+                }
+              },
+              "eventHandlers": [],
+              "text": "ESP32",
+              "textType": "literal",
+              "longMode": "WRAP",
+              "recolor": false
+            },
+            {
+              "objID": "fda3e45b-b169-46c7-9a92-56ae2038008a",
+              "type": "LVGLLabelWidget",
+              "left": 0,
+              "top": 30,
+              "width": 98,
+              "height": 16,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "a9bf737e-205d-4003-aae9-0ca3b6710d43",
+                "inheritFrom": "default"
+              },
+              "timeline": [],
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "content",
+              "heightUnit": "content",
+              "children": [],
+              "flags": "PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "scrollbarMode": "auto",
+              "scrollDirection": "all",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "localStyles": {
+                "objID": "b70b99db-02c2-420a-cbdf-e6366dc84e67",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_color": "#000000"
+                    }
+                  }
+                }
+              },
+              "eventHandlers": [],
+              "text": "GUI with flow",
               "textType": "literal",
               "longMode": "WRAP",
               "recolor": false
@@ -163,7 +292,14 @@
           "disabledStateType": "literal",
           "states": "",
           "localStyles": {
-            "objID": "b5a13813-0572-450d-9638-ca0a6f71f88e"
+            "objID": "f47ce20e-473f-46d2-e392-d95ffd89537a",
+            "definition": {
+              "MAIN": {
+                "DEFAULT": {
+                  "border_color": "#000000"
+                }
+              }
+            }
           },
           "eventHandlers": []
         }
@@ -173,8 +309,8 @@
       "name": "Main",
       "left": 0,
       "top": 0,
-      "width": 480,
-      "height": 320,
+      "width": 128,
+      "height": 64,
       "lvglLocalStyles": {
         "objID": "e85dbd5d-8325-1629-003b-86fd654ae635"
       }
