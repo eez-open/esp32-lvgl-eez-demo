@@ -16,7 +16,7 @@ https://github.com/eez-open/studio
 if you do not have ESP IDF check here how to install
 You can use v4.4.3 
 
-https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/#linux-and-macos
+https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32/get-started/index.html
 
 Go inside you ESP IDF instalation folder and run 
 
