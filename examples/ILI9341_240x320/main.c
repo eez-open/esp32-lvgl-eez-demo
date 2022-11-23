@@ -30,18 +30,25 @@ static const char *CH1_OFF = "OUTP OFF, CH1\n";
 static const char *CH2_ON = "OUTP ON, CH2\n";
 static const char *CH2_OFF = "OUTP OFF, CH2\n";
 
-extern volatile char WIFI_SSID[];
-extern volatile char WIFI_PASS[];
-extern volatile char WIFI_IP[];
-extern volatile char BB3_IP[];
-extern volatile bool BB3_CONNECTED;
-extern volatile bool WIFI_CONNECTED;
-extern volatile bool SCPI_UPDATED;
-extern volatile bool CH1_UPDATE;
-extern volatile bool CH1_POWER_ON;
-extern volatile bool CH2_UPDATE;
-extern volatile bool CH2_POWER_ON;
-extern volatile char BB3_RESPONSE[];
+static const char *CH_ALL_STAT = "MEAS:VOLT? CH1;:MEAS:CURR? CH1;:MEAS:VOLT? CH2;:MEAS:CURR? CH2\n";
+char ALL_CH_STAT[50] = "";
+
+extern char CH1_V[];
+extern char CH1_A[];
+extern char CH2_V[];
+extern char CH2_A[];
+extern char WIFI_SSID[];
+extern char WIFI_PASS[];
+extern char WIFI_IP[];
+extern char BB3_IP[];
+extern bool BB3_CONNECTED;
+extern bool WIFI_CONNECTED;
+extern bool SCPI_UPDATED;
+extern bool CH1_UPDATE;
+extern bool CH1_POWER_ON;
+extern bool CH2_UPDATE;
+extern bool CH2_POWER_ON;
+extern char BB3_RESPONSE[];
 
 /**********************
  *  STATIC PROTOTYPES
@@ -128,6 +135,46 @@ void wifiInit()
   ESP_ERROR_CHECK(esp_wifi_start());
 }
 
+static void parseCH_ALL_STAT(){
+  printf("RECVEIVED ALL CH STATUS: %s", BB3_RESPONSE);
+
+  //char    str[]= "ls -l";
+  char ** res  = NULL;
+  char *  p    = strtok (BB3_RESPONSE, ";");
+  int n_spaces = 0;
+
+
+  /* split string and append tokens to 'res' */
+
+  while (p) {
+    res = realloc (res, sizeof (char*) * ++n_spaces);
+
+    if (res == NULL)
+      exit (-1); /* memory allocation failed */
+
+    res[n_spaces-1] = p;
+
+    p = strtok (NULL, ";");
+  }
+
+  /* realloc one extra element for the last NULL */
+
+  res = realloc (res, sizeof (char*) * (n_spaces+1));
+  res[n_spaces] = 0;
+  printf("Got %i parameter/s", n_spaces);
+  if (n_spaces == 4){
+    /* print the result */
+    printf("%d\n",sizeof(res[0]));
+    if (sizeof(res[0]) == 1){sprintf(CH1_V, "0.0000");}else{sprintf(CH1_V, res[0]);}
+    if (sizeof(res[1]) == 1){sprintf(CH1_A, "0.0000");}else{sprintf(CH1_A, res[1]);}
+    if (sizeof(res[2]) == 1){sprintf(CH2_V, "0.0000");}else{sprintf(CH2_V, res[2]);}
+    if (sizeof(res[3]) == 1){sprintf(CH2_A, "0.0000");}else{sprintf(CH2_A, res[3]);}
+  }
+  /* free the memory allocated */
+
+  free (res);
+}
+
 static void tcp_client_task(void *pvParameters)
 {
     char rx_buffer[128];
@@ -136,25 +183,29 @@ static void tcp_client_task(void *pvParameters)
     int ip_protocol = 0;
     while (1) {
       if(SCPI_UPDATED){
+          SCPI_UPDATED= false;
+          BB3_CONNECTED = false;
     printf("SCPI update: ");
       if (WIFI_CONNECTED == true){
-#if defined(CONFIG_EXAMPLE_IPV4)
-        struct sockaddr_in dest_addr;
-        inet_pton(AF_INET, host_ip, &dest_addr.sin_addr);
-        dest_addr.sin_family = AF_INET;
-        dest_addr.sin_port = htons(PORT);
-        addr_family = AF_INET;
-        ip_protocol = IPPROTO_IP;
-#elif defined(CONFIG_EXAMPLE_SOCKET_IP_INPUT_STDIN)
-        struct sockaddr_storage dest_addr = { 0 };
-        ESP_ERROR_CHECK(get_addr_from_stdin(PORT, SOCK_STREAM, &ip_protocol, &addr_family, &dest_addr));
-#endif
+      #if defined(CONFIG_EXAMPLE_IPV4)
+              struct sockaddr_in dest_addr;
+              inet_pton(AF_INET, host_ip, &dest_addr.sin_addr);
+              dest_addr.sin_family = AF_INET;
+              dest_addr.sin_port = htons(PORT);
+              addr_family = AF_INET;
+              ip_protocol = IPPROTO_IP;
+      #elif defined(CONFIG_EXAMPLE_SOCKET_IP_INPUT_STDIN)
+              struct sockaddr_storage dest_addr = { 0 };
+              ESP_ERROR_CHECK(get_addr_from_stdin(PORT, SOCK_STREAM, &ip_protocol, &addr_family, &dest_addr));
+      #endif
 
         int sock =  socket(addr_family, SOCK_STREAM, ip_protocol);
         if (sock < 0) {
             ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
-            BB3_CONNECTED = false;
-            SCPI_UPDATED= false;
+                SCPI_UPDATED= false;
+                BB3_CONNECTED = false;
+                CH1_UPDATE = false;
+                CH2_UPDATE = false;
             //break;
         }
         else{
@@ -164,8 +215,10 @@ static void tcp_client_task(void *pvParameters)
         int err = connect(sock, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
         if (err != 0) {
             ESP_LOGE(TAG, "Socket unable to connect: errno %d", errno);
-            BB3_CONNECTED = false;
-            SCPI_UPDATED= false;
+                SCPI_UPDATED= false;
+                BB3_CONNECTED = false;
+                CH1_UPDATE = false;
+                CH2_UPDATE = false;
             //break;
         }
         else{
@@ -175,39 +228,58 @@ static void tcp_client_task(void *pvParameters)
       if (BB3_CONNECTED){
         while (1) {
             int err = 0;
-            BB3_CONNECTED = true;
             printf("Connected to BB3 and waiting for SCPI commands\n");
               SCPI_UPDATED = false;
+              BB3_CONNECTED = false;
               if(CH1_UPDATE){
                 printf("CH1 update\n\r");
+                SCPI_UPDATED= false;
+                BB3_CONNECTED = false;
                 CH1_UPDATE = false;
+                CH2_UPDATE = false;
                 if(CH1_POWER_ON){err = send(sock, CH1_ON, strlen(CH1_ON), 0);}
                 else{err = send(sock, CH1_OFF, strlen(CH1_OFF), 0);}
-                err = send(sock, CH1_STATUS, strlen(CH1_STATUS), 0);
+                vTaskDelay(1 / portTICK_RATE_MS);
+                err = send(sock, CH_ALL_STAT, strlen(CH_ALL_STAT), 0);
               }
               else if(CH2_UPDATE){
                 printf("CH2 update\n\r");
+                SCPI_UPDATED= false;
+                BB3_CONNECTED = false;
+                CH1_UPDATE = false;
                 CH2_UPDATE = false;
                 if(CH2_POWER_ON){err = send(sock, CH2_ON, strlen(CH2_ON), 0);} 
                 else{err = send(sock, CH2_OFF, strlen(CH2_OFF), 0);}
-                err = send(sock, CH2_STATUS, strlen(CH2_STATUS), 0);
+                vTaskDelay(1 / portTICK_RATE_MS);
+                err = send(sock, CH_ALL_STAT, strlen(CH_ALL_STAT), 0);
               }
               // Get status of BB3
               else{
-                  err = send(sock, CH1_STATUS, strlen(CH1_STATUS), 0);
+                  err = send(sock, CH_ALL_STAT, strlen(CH_ALL_STAT), 0);
+                  printf("GET ALL CH STATUS: %s", CH_ALL_STAT);
+                  SCPI_UPDATED= false;
+                  BB3_CONNECTED = false;
+                  CH1_UPDATE = false;
+                  CH2_UPDATE = false;
               }
             
             if (err < 0) {
-                BB3_CONNECTED = false;
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
-              //  break;
+                SCPI_UPDATED= false;
+                BB3_CONNECTED = false;
+                  CH1_UPDATE = false;
+                  CH2_UPDATE = false;
+                break;
             }
-
+            vTaskDelay(1 / portTICK_RATE_MS);
             int len = recv(sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
             // Error occurred during receiving
             if (len < 0) {
                 ESP_LOGE(TAG, "recv failed: errno %d", errno);
+                SCPI_UPDATED = false;
                 BB3_CONNECTED = false;
+                CH1_UPDATE = false;
+                CH2_UPDATE = false;
                // break;
             }
             // Data received
@@ -216,24 +288,37 @@ static void tcp_client_task(void *pvParameters)
                 sprintf(BB3_RESPONSE, rx_buffer);
                 ESP_LOGI(TAG, "Received %d bytes from %s:", len, host_ip);
                 ESP_LOGI(TAG, "%s", rx_buffer);
+                parseCH_ALL_STAT();
+                SCPI_UPDATED= false;
+                BB3_CONNECTED = false;
+                CH1_UPDATE = false;
+                CH2_UPDATE = false;
+                shutdown(sock, 0);
+                close(sock);
+                break;
             }
             //}
-            vTaskDelay(200 / portTICK_RATE_MS);
+            vTaskDelay(100 / portTICK_RATE_MS);
         }
       }
         if (sock != -1) {
             ESP_LOGE(TAG, "Shutting down socket and restarting...");
+            CH1_UPDATE = false;
+            CH2_UPDATE = false;
             BB3_CONNECTED = false;
+            SCPI_UPDATED= false;
             shutdown(sock, 0);
             close(sock);
         }
+            SCPI_UPDATED= false;
+            CH1_UPDATE = false;
+            CH2_UPDATE = false;
             BB3_CONNECTED = false;
             shutdown(sock, 0);
             close(sock);
     }
-
 }
-vTaskDelay(200 / portTICK_RATE_MS);
+vTaskDelay(500 / portTICK_RATE_MS);
 }
 }
 
@@ -254,7 +339,6 @@ void OnConnected(void *para)
       printf("Gateway: %s\n", ip4addr_ntoa(&ip_info.ip));
       sprintf(WIFI_IP,ip4addr_ntoa(&ip_info.ip));
       printf("IP: %s\n", WIFI_IP);
-      xTaskCreatePinnedToCore(&tcp_client_task, "tcp_client_task", 4096 * 2,NULL,10,NULL, 1 );
       xSemaphoreTake(connectionSemaphore, portMAX_DELAY);
     }
     else
@@ -287,5 +371,6 @@ void app_main()
     esp_log_level_set(TAG, ESP_LOG_DEBUG);
     connectionSemaphore = xSemaphoreCreateBinary();
     wifiInit();
-    xTaskCreate(&OnConnected, "handel comms", 1024 * 3, NULL, 5, NULL); 
+    xTaskCreate(&OnConnected, "handel comms", 1024 * 3, NULL, 5, NULL);
+    xTaskCreate(&tcp_client_task, "tcp_client_task", 4096 * 2,NULL,2,NULL);
 }
