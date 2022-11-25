@@ -513,20 +513,20 @@
         {
           "objID": "e1aa1617-69a1-4ec1-91fb-ae1a189bacc0",
           "type": "StartActionComponent",
-          "left": 38,
-          "top": -121,
+          "left": -15,
+          "top": -347,
           "width": 87,
-          "height": 24,
+          "height": 25,
           "customInputs": [],
           "customOutputs": []
         },
         {
           "objID": "e8aaaae9-7cc5-4c7b-f1af-029d22ff5794",
           "type": "DelayActionComponent",
-          "left": 233,
-          "top": -123,
+          "left": 211,
+          "top": -347,
           "width": 87,
-          "height": 53,
+          "height": 55,
           "customInputs": [],
           "customOutputs": [],
           "milliseconds": "2000"
@@ -534,10 +534,10 @@
         {
           "objID": "1b99de53-0c03-44a9-93f2-047e4d1c6727",
           "type": "LVGLActionComponent",
-          "left": 369,
-          "top": -123,
-          "width": 217,
-          "height": 53,
+          "left": 357,
+          "top": -347,
+          "width": 201,
+          "height": 55,
           "customInputs": [],
           "customOutputs": [],
           "actions": [
@@ -545,6 +545,99 @@
               "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
               "action": "CHANGE_SCREEN",
               "screen": "Page1",
+              "fadeMode": "NONE",
+              "speed": 0,
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "objID": "8ae67121-f515-45cb-cf95-30d85f88d368",
+          "type": "DelayActionComponent",
+          "left": 211,
+          "top": -250,
+          "width": 87,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "milliseconds": "2000"
+        },
+        {
+          "objID": "e99c1f72-a0f6-49bb-9886-b463f545b7b5",
+          "type": "LVGLActionComponent",
+          "left": 435,
+          "top": -250,
+          "width": 201,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
+              "action": "CHANGE_SCREEN",
+              "screen": "Page2",
+              "fadeMode": "NONE",
+              "speed": 0,
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "objID": "2f3b8a13-92d7-42e7-b3ec-909f4bfe855c",
+          "type": "DelayActionComponent",
+          "left": 211,
+          "top": -169,
+          "width": 87,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "milliseconds": "2000"
+        },
+        {
+          "objID": "f040139a-fcb8-4c8d-9123-69456d7653f0",
+          "type": "LVGLActionComponent",
+          "left": 446,
+          "top": -167,
+          "width": 201,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
+              "action": "CHANGE_SCREEN",
+              "screen": "Page3",
+              "fadeMode": "NONE",
+              "speed": 0,
+              "delay": 0
+            }
+          ]
+        },
+        {
+          "objID": "8fd11a4f-a7b2-4900-b8e0-5a585dfc536a",
+          "type": "DelayActionComponent",
+          "left": 211,
+          "top": -83,
+          "width": 87,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "milliseconds": "2000"
+        },
+        {
+          "objID": "a1e946df-e429-4ed5-a36d-7aabc4c970d8",
+          "type": "LVGLActionComponent",
+          "left": 446,
+          "top": -81,
+          "width": 195,
+          "height": 55,
+          "customInputs": [],
+          "customOutputs": [],
+          "actions": [
+            {
+              "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
+              "action": "CHANGE_SCREEN",
+              "screen": "Main",
               "fadeMode": "NONE",
               "speed": 0,
               "delay": 0
@@ -565,6 +658,55 @@
           "source": "e8aaaae9-7cc5-4c7b-f1af-029d22ff5794",
           "output": "@seqout",
           "target": "1b99de53-0c03-44a9-93f2-047e4d1c6727",
+          "input": "@seqin"
+        },
+        {
+          "objID": "b5ff0435-c484-4399-80b4-2fedb930b389",
+          "source": "8ae67121-f515-45cb-cf95-30d85f88d368",
+          "output": "@seqout",
+          "target": "e99c1f72-a0f6-49bb-9886-b463f545b7b5",
+          "input": "@seqin"
+        },
+        {
+          "objID": "d54e4e08-f615-43b1-e8a4-ebca894e5595",
+          "source": "1b99de53-0c03-44a9-93f2-047e4d1c6727",
+          "output": "@seqout",
+          "target": "8ae67121-f515-45cb-cf95-30d85f88d368",
+          "input": "@seqin"
+        },
+        {
+          "objID": "aa330c1e-b8e4-454f-f8c9-af725d7b23e9",
+          "source": "2f3b8a13-92d7-42e7-b3ec-909f4bfe855c",
+          "output": "@seqout",
+          "target": "f040139a-fcb8-4c8d-9123-69456d7653f0",
+          "input": "@seqin"
+        },
+        {
+          "objID": "07900e8b-5fbf-4a17-e127-a602bb4005e8",
+          "source": "8fd11a4f-a7b2-4900-b8e0-5a585dfc536a",
+          "output": "@seqout",
+          "target": "a1e946df-e429-4ed5-a36d-7aabc4c970d8",
+          "input": "@seqin"
+        },
+        {
+          "objID": "127b24f5-9fc3-4722-9031-2aa7c86b4c79",
+          "source": "e99c1f72-a0f6-49bb-9886-b463f545b7b5",
+          "output": "@seqout",
+          "target": "2f3b8a13-92d7-42e7-b3ec-909f4bfe855c",
+          "input": "@seqin"
+        },
+        {
+          "objID": "1f9f1315-7f27-4ad8-9ff8-947f40124e59",
+          "source": "f040139a-fcb8-4c8d-9123-69456d7653f0",
+          "output": "@seqout",
+          "target": "8fd11a4f-a7b2-4900-b8e0-5a585dfc536a",
+          "input": "@seqin"
+        },
+        {
+          "objID": "9b99c01b-1ce3-4958-8487-0ff3fc2cd960",
+          "source": "a1e946df-e429-4ed5-a36d-7aabc4c970d8",
+          "output": "@seqout",
+          "target": "e8aaaae9-7cc5-4c7b-f1af-029d22ff5794",
           "input": "@seqin"
         }
       ],
@@ -1027,65 +1169,9 @@
           "textType": "literal",
           "longMode": "WRAP",
           "recolor": false
-        },
-        {
-          "objID": "82b669aa-1d86-4786-952e-8e316fe339e9",
-          "type": "StartActionComponent",
-          "left": 0,
-          "top": 620,
-          "width": 87,
-          "height": 24,
-          "customInputs": [],
-          "customOutputs": []
-        },
-        {
-          "objID": "391852b5-91d0-4964-a976-0bff10ebcb4d",
-          "type": "DelayActionComponent",
-          "left": 195,
-          "top": 618,
-          "width": 87,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "milliseconds": "2000"
-        },
-        {
-          "objID": "6ae91f8f-e5b7-43a9-bd9e-084f9e3bf8c1",
-          "type": "LVGLActionComponent",
-          "left": 419,
-          "top": 618,
-          "width": 217,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "actions": [
-            {
-              "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
-              "action": "CHANGE_SCREEN",
-              "screen": "Page2",
-              "fadeMode": "NONE",
-              "speed": 0,
-              "delay": 0
-            }
-          ]
         }
       ],
-      "connectionLines": [
-        {
-          "objID": "d5e554e0-6bb7-493b-a839-853ff43516f1",
-          "source": "82b669aa-1d86-4786-952e-8e316fe339e9",
-          "output": "@seqout",
-          "target": "391852b5-91d0-4964-a976-0bff10ebcb4d",
-          "input": "@seqin"
-        },
-        {
-          "objID": "bb694cc0-b89b-4120-accb-45b0e03b6504",
-          "source": "391852b5-91d0-4964-a976-0bff10ebcb4d",
-          "output": "@seqout",
-          "target": "6ae91f8f-e5b7-43a9-bd9e-084f9e3bf8c1",
-          "input": "@seqin"
-        }
-      ],
+      "connectionLines": [],
       "localVariables": [
         {
           "objID": "6add51ce-46cf-450a-9a65-ad5dd51e1ace",
@@ -1590,65 +1676,9 @@
             "objID": "61ac4553-492e-4af4-b3c4-96067ca53b7c"
           },
           "eventHandlers": []
-        },
-        {
-          "objID": "49b355c2-5e76-4f63-e911-af948a1a560f",
-          "type": "StartActionComponent",
-          "left": 7,
-          "top": 602,
-          "width": 87,
-          "height": 24,
-          "customInputs": [],
-          "customOutputs": []
-        },
-        {
-          "objID": "eadb2259-4a3e-4be6-db1a-283cd6bf6538",
-          "type": "DelayActionComponent",
-          "left": 202,
-          "top": 600,
-          "width": 87,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "milliseconds": "2000"
-        },
-        {
-          "objID": "350ae78b-1c11-4be1-b926-78c1906bc5d6",
-          "type": "LVGLActionComponent",
-          "left": 437,
-          "top": 602,
-          "width": 217,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "actions": [
-            {
-              "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
-              "action": "CHANGE_SCREEN",
-              "screen": "Page3",
-              "fadeMode": "NONE",
-              "speed": 0,
-              "delay": 0
-            }
-          ]
         }
       ],
-      "connectionLines": [
-        {
-          "objID": "1bfffbd4-4629-4641-f73d-2ff06be4766f",
-          "source": "49b355c2-5e76-4f63-e911-af948a1a560f",
-          "output": "@seqout",
-          "target": "eadb2259-4a3e-4be6-db1a-283cd6bf6538",
-          "input": "@seqin"
-        },
-        {
-          "objID": "9e37d273-9779-4dfe-b390-bf0d09a7ae94",
-          "source": "eadb2259-4a3e-4be6-db1a-283cd6bf6538",
-          "output": "@seqout",
-          "target": "350ae78b-1c11-4be1-b926-78c1906bc5d6",
-          "input": "@seqin"
-        }
-      ],
+      "connectionLines": [],
       "localVariables": [
         {
           "objID": "6add51ce-46cf-450a-9a65-ad5dd51e1ace",
@@ -2197,65 +2227,9 @@
             "objID": "61ac4553-492e-4af4-b3c4-96067ca53b7c"
           },
           "eventHandlers": []
-        },
-        {
-          "objID": "a4816fe9-1549-414f-8704-04107c6d82f1",
-          "type": "StartActionComponent",
-          "left": 0,
-          "top": 619,
-          "width": 87,
-          "height": 24,
-          "customInputs": [],
-          "customOutputs": []
-        },
-        {
-          "objID": "12ac681e-ff57-4e76-a47d-6c3d17f424e9",
-          "type": "DelayActionComponent",
-          "left": 195,
-          "top": 617,
-          "width": 87,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "milliseconds": "2000"
-        },
-        {
-          "objID": "93efbb9a-8d9e-4f7d-d66b-90f1065b4e9f",
-          "type": "LVGLActionComponent",
-          "left": 430,
-          "top": 619,
-          "width": 211,
-          "height": 53,
-          "customInputs": [],
-          "customOutputs": [],
-          "actions": [
-            {
-              "objID": "977923ef-9e3d-46fd-d213-b09b74d0dbf5",
-              "action": "CHANGE_SCREEN",
-              "screen": "Main",
-              "fadeMode": "NONE",
-              "speed": 0,
-              "delay": 0
-            }
-          ]
         }
       ],
-      "connectionLines": [
-        {
-          "objID": "9dde7e39-f6a4-4da6-b460-e2d42644cf85",
-          "source": "a4816fe9-1549-414f-8704-04107c6d82f1",
-          "output": "@seqout",
-          "target": "12ac681e-ff57-4e76-a47d-6c3d17f424e9",
-          "input": "@seqin"
-        },
-        {
-          "objID": "b255ab94-983c-472e-b48c-112dda9ed529",
-          "source": "12ac681e-ff57-4e76-a47d-6c3d17f424e9",
-          "output": "@seqout",
-          "target": "93efbb9a-8d9e-4f7d-d66b-90f1065b4e9f",
-          "input": "@seqin"
-        }
-      ],
+      "connectionLines": [],
       "localVariables": [
         {
           "objID": "6add51ce-46cf-450a-9a65-ad5dd51e1ace",
