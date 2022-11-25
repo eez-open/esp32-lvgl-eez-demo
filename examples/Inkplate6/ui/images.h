@@ -1,7 +1,7 @@
 #ifndef EEZ_LVGL_UI_IMAGES_H
 #define EEZ_LVGL_UI_IMAGES_H
 
-#include "lvgl/lvgl.h"
+#include <lvgl/lvgl.h>
 
 
 #ifndef EXT_IMG_DESC_T

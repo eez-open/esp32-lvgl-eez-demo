@@ -1,7 +1,7 @@
 #ifndef EEZ_LVGL_UI_SCREENS_H
 #define EEZ_LVGL_UI_SCREENS_H
 
-#include "lvgl/lvgl.h"
+#include <lvgl/lvgl.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,6 +17,13 @@ typedef struct _objects_t {
     lv_obj_t *txt_ch1_i;
     lv_obj_t *txt_ch1_v;
     lv_obj_t *txt_ch2_v;
+    lv_obj_t *kbd_setup_voltage;
+    lv_obj_t *lbl_ch1_status;
+    lv_obj_t *lbl_ch2_status;
+    lv_obj_t *lbl_ch1_v;
+    lv_obj_t *lbl_ch1_a;
+    lv_obj_t *lbl_ch2_v;
+    lv_obj_t *lbl_ch2_a;
     lv_obj_t *lbl_conn_status;
     lv_obj_t *txt_ssid;
     lv_obj_t *txt_pass;
@@ -24,9 +31,11 @@ typedef struct _objects_t {
     lv_obj_t *lbl_conn_status_1;
     lv_obj_t *txt_bb3_ip;
     lv_obj_t *kbd_setup_bb3;
-    lv_obj_t *keyboard_1;
-    lv_obj_t *label_1;
+    lv_obj_t *button_1;
+    lv_obj_t *button_3;
     lv_obj_t *button_11;
+    lv_obj_t *spinner_1;
+    lv_obj_t *label_1;
     lv_obj_t *label_2;
 } objects_t;
 

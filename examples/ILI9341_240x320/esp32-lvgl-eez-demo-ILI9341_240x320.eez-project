@@ -2,7 +2,8 @@
   "objID": "6666cd76-f969-5646-9e7b-e39d750cc7d9",
   "lvglStyles": {
     "objID": "a31bd004-35c5-b3fb-5c8b-78ea5c7693b8",
-    "styles": []
+    "styles": [],
+    "defaultStyles": {}
   },
   "settings": {
     "objID": "e007d988-9fba-797d-72e9-efc33ca6d05c",
@@ -27,7 +28,7 @@
         {
           "objID": "05204dce-0fc5-4c81-b733-2ccc8e6c8671",
           "fileName": "screens.h",
-          "template": "#ifndef EEZ_LVGL_UI_SCREENS_H\r\n#define EEZ_LVGL_UI_SCREENS_H\r\n\r\n#include \"lvgl/lvgl.h\"\r\n\r\n#ifdef __cplusplus\r\nextern \"C\" {\r\n#endif\r\n\r\n//${eez-studio LVGL_SCREENS_DECL}\r\n//${eez-studio LVGL_SCREENS_DECL_EXT}\r\n\r\n#ifdef __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*EEZ_LVGL_UI_SCREENS_H*/"
+          "template": "#ifndef EEZ_LVGL_UI_SCREENS_H\r\n#define EEZ_LVGL_UI_SCREENS_H\r\n\r\n//${eez-studio LVGL_INCLUDE}\r\n\r\n#ifdef __cplusplus\r\nextern \"C\" {\r\n#endif\r\n\r\n//${eez-studio LVGL_SCREENS_DECL}\r\n//${eez-studio LVGL_SCREENS_DECL_EXT}\r\n\r\n#ifdef __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*EEZ_LVGL_UI_SCREENS_H*/"
         },
         {
           "objID": "2212bc5e-cf4a-4a81-c9ab-a671066d086f",
@@ -37,7 +38,7 @@
         {
           "objID": "19d3d573-88a3-4550-f4da-753b61d7f0c4",
           "fileName": "actions.h",
-          "template": "#ifndef EEZ_LVGL_UI_EVENTS_H\r\n#define EEZ_LVGL_UI_EVENTS_H\r\n\r\n#include \"lvgl/lvgl.h\"\r\n\r\n//${eez-studio LVGL_ACTIONS_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_EVENTS_H*/"
+          "template": "#ifndef EEZ_LVGL_UI_EVENTS_H\r\n#define EEZ_LVGL_UI_EVENTS_H\r\n\r\n//${eez-studio LVGL_INCLUDE}\r\n\r\n//${eez-studio LVGL_ACTIONS_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_EVENTS_H*/"
         },
         {
           "objID": "ddb840d3-2cd4-4c24-897d-1e367e2df75f",
@@ -57,7 +58,7 @@
         {
           "objID": "81fa9cb7-33e4-4272-9340-49a50037b327",
           "fileName": "images.h",
-          "template": "#ifndef EEZ_LVGL_UI_IMAGES_H\r\n#define EEZ_LVGL_UI_IMAGES_H\r\n\r\n#include \"lvgl/lvgl.h\"\r\n\r\n//${eez-studio LVGL_IMAGES_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_IMAGES_H*/"
+          "template": "#ifndef EEZ_LVGL_UI_IMAGES_H\r\n#define EEZ_LVGL_UI_IMAGES_H\r\n\r\n//${eez-studio LVGL_INCLUDE}\r\n\r\n//${eez-studio LVGL_IMAGES_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_IMAGES_H*/"
         },
         {
           "objID": "5844b3a8-54b7-4bdf-ff04-d052e689328c",
@@ -67,7 +68,17 @@
         {
           "objID": "bad0addd-10de-48f7-e57e-b40fce3e7c45",
           "fileName": "fonts.h",
-          "template": "#ifndef EEZ_LVGL_UI_FONTS_H\r\n#define EEZ_LVGL_UI_FONTS_H\r\n\r\n#include \"lvgl/lvgl.h\"\r\n\r\n//${eez-studio LVGL_FONTS_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_FONTS_H*/"
+          "template": "#ifndef EEZ_LVGL_UI_FONTS_H\r\n#define EEZ_LVGL_UI_FONTS_H\r\n\r\n//${eez-studio LVGL_INCLUDE}\r\n\r\n//${eez-studio LVGL_FONTS_DECL}\r\n\r\n#endif /*EEZ_LVGL_UI_FONTS_H*/"
+        },
+        {
+          "objID": "c657221f-3727-4bc3-efc3-eefe9dfcb87a",
+          "fileName": "styles.h",
+          "template": "#ifndef EEZ_LVGL_UI_STYLES_H\r\n#define EEZ_LVGL_UI_STYLES_H\r\n\r\n//${eez-studio LVGL_INCLUDE}\r\n\r\n#ifdef __cplusplus\r\nextern \"C\" {\r\n#endif\r\n\r\n//${eez-studio LVGL_STYLES_DECL}\r\n\r\n#ifdef __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*EEZ_LVGL_UI_STYLES_H*/"
+        },
+        {
+          "objID": "73187da2-898c-440c-f503-02fcee0af7e9",
+          "fileName": "styles.c",
+          "template": "#include \"styles.h\"\n#include \"images.h\"\n#include \"fonts.h\"\n\n//${eez-studio LVGL_STYLES_DEF}\n"
         },
         {
           "objID": "9063559c-76c3-4445-d6a4-edef293caf0c",
@@ -85,7 +96,8 @@
           "template": "#include \"vars.h\"\r\n\r\nchar WIFI_SSID[50] = \"W1_1047581318\";\r\nchar WIFI_PASS[50] = \"SunceMojeMalo\";\r\nchar WIFI_IP[20] = \"\";\r\nchar BB3_IP[20] = \"192.168.100.80\";\r\nchar BB3_RESPONSE[500] = \"\";\r\nchar CH1_V[10] = \"0.0000\";\r\nchar CH1_A[10] = \"0.0000\";\r\nchar CH2_V[10] = \"0.0000\";\r\nchar CH2_A[10] = \"0.0000\";\r\nbool BB3_CONNECTED = false;\r\nbool WIFI_CONNECTED = false;\r\nbool SCPI_UPDATED = false;\r\nbool CH1_UPDATE = false;\r\nbool CH1_POWER_ON = false;\r\nbool CH2_UPDATE = false;\r\nbool CH2_POWER_ON = false;\r\n\r\nconst char *get_var_wifi_ssid(){return WIFI_SSID;}\r\nvoid set_var_wifi_ssid(const char *value){sprintf(WIFI_SSID,value);}\r\nconst char *get_var_wifi_pass(){return WIFI_PASS;}\r\nvoid set_var_wifi_pass(const char *value){sprintf(WIFI_PASS,value);}\r\nconst char *get_var_wifi_ip(){return WIFI_IP;}\r\nvoid set_var_wifi_ip(const char *value){}\r\nbool get_var_wifi_connected(){return WIFI_CONNECTED;}\r\nvoid set_var_wifi_connected(bool value){}\r\nconst char *get_var_bb3_ip(){return BB3_IP;}\r\nvoid set_var_bb3_ip(const char *value){sprintf(BB3_IP,value);}\r\nbool get_var_bb3_connected(){return BB3_CONNECTED;}\r\nvoid set_var_bb3_connected(bool value){}\r\nbool get_var_scpi_updated(){return SCPI_UPDATED;}\r\nvoid set_var_scpi_updated(bool value){SCPI_UPDATED = value;printf(\"SCPI_UPDATE: %d\\n\", SCPI_UPDATED);}\r\nbool get_var_ch1_update(){return CH1_UPDATE;}\r\nvoid set_var_ch1_update(bool value){CH1_UPDATE = value;printf(\"CH1_UPDATE: %d\\n\", CH1_UPDATE);}\r\nbool get_var_ch1_power_on(){return CH1_POWER_ON;}\r\nvoid set_var_ch1_power_on(bool value){CH1_POWER_ON = value;printf(\"CH1_POWER_ON: %d\\n\", CH1_POWER_ON);}\r\nbool get_var_ch2_update(){return CH2_UPDATE;}\r\nvoid set_var_ch2_update(bool value){CH2_UPDATE = value;printf(\"CH2_UPDATE: %d\\n\", CH2_UPDATE);}\r\nbool get_var_ch2_power_on(){return CH2_POWER_ON;}\r\nvoid set_var_ch2_power_on(bool value){CH2_POWER_ON = value;printf(\"CH2_POWER_ON: %d\\n\", CH2_POWER_ON);}\r\nconst char *get_var_bb3_response(){return BB3_RESPONSE;}\r\nvoid set_var_bb3_response(const char *value){}\r\nconst char *get_var_ch1_v(){return CH1_V;}\r\nvoid set_var_ch1_v(const char *value){sprintf(CH1_V,value);}\r\nconst char *get_var_ch1_a(){return CH1_A;}\r\nvoid set_var_ch1_a(const char *value){sprintf(CH1_A,value);}\r\nconst char *get_var_ch2_v(){return CH2_V;}\r\nvoid set_var_ch2_v(const char *value){sprintf(CH2_V,value);}\r\nconst char *get_var_ch2_a(){return CH2_A;}\r\nvoid set_var_ch2_a(const char *value){sprintf(CH2_A,value);}"
         }
       ],
-      "destinationFolder": "ui"
+      "destinationFolder": "ui",
+      "lvglInclude": "lvgl/lvgl.h"
     }
   },
   "variables": {
