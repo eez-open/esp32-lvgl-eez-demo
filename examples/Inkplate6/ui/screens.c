@@ -5,8 +5,10 @@
 #include "ui.h"
 
 objects_t objects;
+lv_obj_t *tick_value_change_obj;
 
 void create_screen_main() {
+    void *flowState = getFlowState(0, 0);
     lv_obj_t *obj = lv_obj_create(0);
     objects.main = obj;
     lv_obj_set_pos(obj, 0, 0);
@@ -94,9 +96,11 @@ void create_screen_main() {
 }
 
 void tick_screen_main() {
+    void *flowState = getFlowState(0, 0);
 }
 
 void create_screen_page1() {
+    void *flowState = getFlowState(0, 1);
     lv_obj_t *obj = lv_obj_create(0);
     objects.page1 = obj;
     lv_obj_set_pos(obj, 0, 0);
@@ -195,9 +199,11 @@ void create_screen_page1() {
 }
 
 void tick_screen_page1() {
+    void *flowState = getFlowState(0, 1);
 }
 
 void create_screen_page2() {
+    void *flowState = getFlowState(0, 2);
     lv_obj_t *obj = lv_obj_create(0);
     objects.page2 = obj;
     lv_obj_set_pos(obj, 0, 0);
@@ -307,9 +313,11 @@ void create_screen_page2() {
 }
 
 void tick_screen_page2() {
+    void *flowState = getFlowState(0, 2);
 }
 
 void create_screen_page3() {
+    void *flowState = getFlowState(0, 3);
     lv_obj_t *obj = lv_obj_create(0);
     objects.page3 = obj;
     lv_obj_set_pos(obj, 0, 0);
@@ -430,6 +438,7 @@ void create_screen_page3() {
 }
 
 void tick_screen_page3() {
+    void *flowState = getFlowState(0, 3);
 }
 
 
