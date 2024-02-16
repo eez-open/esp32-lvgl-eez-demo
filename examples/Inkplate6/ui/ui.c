@@ -5,7 +5,7 @@
 #include "actions.h"
 
 ActionExecFunc actions[] = {
-    action_on_color_wheel_value_changed,
+    0
 };
 
 
